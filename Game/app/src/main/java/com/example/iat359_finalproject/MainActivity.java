@@ -12,7 +12,6 @@ import android.view.WindowManager;
 import android.widget.ImageButton;
 
 import java.util.Set;
-
 public class MainActivity extends AppCompatActivity {
     ImageButton battleButton, hallButton, settingButton;
 
