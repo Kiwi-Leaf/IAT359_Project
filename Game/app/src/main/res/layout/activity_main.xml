@@ -50,7 +50,7 @@
         app:layout_constraintVertical_bias="0.9"
         app:layout_constraintHorizontal_bias="1"
         android:onClick="gotoBattle"
-        android:src="@drawable/gameUI_Battle"/>
+        android:src="@drawable/game_ui_battle"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -82,7 +82,7 @@
         app:layout_constraintVertical_bias="0.9"
         app:layout_constraintHorizontal_bias="0"
         android:onClick="gotoHallOfFrame"
-        android:src="@drawable/gameUI_hallOfFrame"/>
+        android:src="@drawable/game_ui_hall_of_frame"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
