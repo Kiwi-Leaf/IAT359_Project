@@ -6,4 +6,150 @@
     android:layout_height="match_parent"
     tools:context=".SettingScreen">
 
+
+    <ImageView
+        android:id="@+id/backgroundIV"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/main_screen_background_blurred" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="70dp"
+        android:background="@color/fire_trans"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Game Setting"
+            android:layout_marginLeft="20dp"
+            android:textSize="24dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:padding="15dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:background="@color/fire">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Main Sound Level"
+                android:textSize="18sp"
+                android:textColor="@color/white"
+                android:layout_weight="1"
+                />
+            <SeekBar
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:min="0"
+                android:max="100"
+                android:progress="@integer/mainSoundLevel"
+                android:id="@+id/mainSoundSeekBar"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:padding="15dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:background="@color/fire">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="BGM Level"
+                android:textSize="18sp"
+                android:textColor="@color/white"
+                android:layout_weight="1"
+                />
+            <SeekBar
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/bgmSeekBar"
+                android:min="0"
+                android:max="100"
+                android:progress="@integer/bgmLevel"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:padding="15dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:background="@color/fire">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sound Effect Level"
+                android:textSize="18sp"
+                android:textColor="@color/white"
+                android:layout_weight="1"
+                />
+            <SeekBar
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/soundEffectSeekBar"
+                android:min="0"
+                android:max="100"
+                android:progress="@integer/soundEffectLevel"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:padding="15dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:background="@color/fire">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Theme"
+                android:textSize="18sp"
+                android:textColor="@color/white"
+                android:layout_weight="1"
+                />
+
+            <Spinner
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/themeSpinner"
+                >
+
+            </Spinner>
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
