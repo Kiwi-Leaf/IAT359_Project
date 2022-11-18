@@ -1,7 +1,13 @@
 package com.example.iat359_finalproject;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContract;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +18,7 @@ import android.widget.Switch;
 
 public class StageSelectScreen extends AppCompatActivity implements View.OnClickListener {
     Button selectStageButton1,selectStageButton2,selectStageButton3,characterButton;
+    final int CHARACTER_REQUEST_CODE=1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,10 +66,33 @@ public class StageSelectScreen extends AppCompatActivity implements View.OnClick
 
             case (R.id.characterButton):
                 intent=new Intent(this,StatScreen.class);
-                startActivity(intent);
+                characterChanged.launch(intent);
                 break;
                 }
 
 
     }
+
+    ActivityResultLauncher<Intent> characterChanged= registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode()== Activity.RESULT_OK){
+                        Intent data=result.getData();
+                        if(data.hasExtra("CHANGE_MADE")){
+                            if(data.getExtras().getBoolean("CHANGE_MADE")){
+
+
+                                //Update character
+
+
+
+                            }
+                        }
+                    }
+                }
+            }
+
+    );
 }
