@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="mainSoundLevel"> 100</integer>
+    <integer name="bgmLevel"> 100</integer>
+    <integer name="soundEffectLevel">100</integer>
+    <integer name="themeColor">0</integer>
+</resources>

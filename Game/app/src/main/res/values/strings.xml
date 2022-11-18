@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">IAT359_FinalProject</string>
+    <string-array name="theme_array">
+        <item>Fire</item>
+        <item>Water</item>
+        <item>Electric</item>
+        <item>Wind</item>
+        <item>Earth</item>
+    </string-array>
 </resources>
