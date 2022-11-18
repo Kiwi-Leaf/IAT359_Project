@@ -4,11 +4,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 public class UITool {
-    public final int THEME_FIRE=0;
-    public final int THEME_WATER=1;
-    public final int THEME_ELECTRIC=2;
-    public final int THEME_WIND=3;
-    public final int THEME_EARTH=4;
+    public static final int THEME_FIRE=0;
+    public static final int THEME_WATER=1;
+    public static final int THEME_ELECTRIC=2;
+    public static final int THEME_WIND=3;
+    public static final int THEME_EARTH=4;
 
 
 

@@ -28,8 +28,11 @@ public class SettingScreen extends AppCompatActivity implements AdapterView.OnIt
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        if(view== themeSpinner){
-            Log.i(DEBUG, "int returned: "+i+", long returned: "+l);
+       //int i = UITool Theme value
+        switch(i){
+            case UITool.THEME_FIRE:
+                //set current color and current color_trans in xml to fire and fire_trans
+                
         }
     }
 
