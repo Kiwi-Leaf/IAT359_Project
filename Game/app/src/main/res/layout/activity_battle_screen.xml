@@ -48,6 +48,152 @@
         android:background="@color/currentColorTrans"
         android:visibility="visible"
         />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="[Enemy name"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.05"
+        android:id="@+id/enemyNameTV"/>
+    <ProgressBar
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/enemyHPBar"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/enemyNameTV"
+        app:layout_constraintVertical_bias="0.02"
+        android:progress="90"
+        android:progressTint="#3cf072"
+        android:progressBackgroundTint="#cc2d2d"
+        />
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:id="@+id/enemyIV"
+        android:scaleType="centerInside"
+        android:src="@drawable/dog_fire"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/enemyHPBar"
+        app:layout_constraintVertical_bias="0.02"/>
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:id="@+id/characterBattleIV"
+        android:scaleType="centerInside"
+        android:src="@drawable/background_placeholder"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/enemyHPBar"
+        app:layout_constraintVertical_bias="0.4"/>
+
+    <ProgressBar
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/characterHPBar"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@id/characterBattleIV"
+        app:layout_constraintTop_toBottomOf="@id/enemyNameTV"
+        app:layout_constraintVertical_bias="0.45"
+        android:progress="90"
+        android:progressTint="#3cf072"
+        android:progressBackgroundTint="#cc2d2d"
+        />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:id="@+id/attackButton"
+
+        android:backgroundTint="@color/currentColor"
+        android:text="Attack"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@id/rect_overlay"
+        app:layout_constraintTop_toBottomOf="@id/characterBattleIV"
+        app:layout_constraintVertical_bias="0.05"
+        />
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="140dp"
+        android:id="@+id/escapeButton"
+
+        android:backgroundTint="@color/currentColor"
+        android:text="run"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/defenceButton"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="@id/rect_overlay"
+        app:layout_constraintTop_toBottomOf="@id/attackButton"
+        app:layout_constraintVertical_bias="0.05"
+        />
+
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="140dp"
+        android:id="@+id/defenceButton"
+
+        android:backgroundTint="@color/currentColor"
+        android:text="Defence"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        app:layout_constraintHorizontal_weight="2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/magicButton"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toEndOf="@id/escapeButton"
+        app:layout_constraintTop_toBottomOf="@id/attackButton"
+        app:layout_constraintVertical_bias="0.05"
+        />
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="140dp"
+        android:id="@+id/magicButton"
+
+        android:backgroundTint="@color/currentColor"
+        android:text="Magic"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+
+        app:layout_constraintHorizontal_weight="2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toEndOf="@id/defenceButton"
+        app:layout_constraintTop_toBottomOf="@id/attackButton"
+        app:layout_constraintVertical_bias="0.05"
+        />
+
+
+
+
 
 
 
