@@ -15,12 +15,18 @@ public class BattleScreen extends AppCompatActivity implements View.OnClickListe
     Button attackButton,defenceButton,escapeButton,magicButton;
     ImageView enemyIV,characterIV;
     ProgressBar enemyHPProgressBar, characterHPProgressBar;
+    int stage;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_battle_screen);
+
+        if (this.getIntent().hasExtra("BATTLE")){
+            stage=this.getIntent().getExtras().getInt("BATTLE");
+            //and set up the stage with int number
+        }
 
         //Hide the action bar on top
         requestWindowFeature(Window.FEATURE_NO_TITLE);
