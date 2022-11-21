@@ -13,6 +13,7 @@ import android.widget.Button;
 
 public class GameEndScreen extends AppCompatActivity {
     Button retryBattleButton, backToStageButton ;
+    View background;
     int previousStage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +25,13 @@ public class GameEndScreen extends AppCompatActivity {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
 
+        retryBattleButton=findViewById(R.id.retryBattleButton);
+        backToStageButton=findViewById(R.id.backToStageButton);
+        background=findViewById(R.id.rect_overlay_gameEnd);
 
+        UITool.setThemeColor(background,UITool.THEME_TYPE_TRANS,this);
+        UITool.setButtonThemeColor(backToStageButton,UITool.THEME_TYPE_SOLID,this);
+        UITool.setButtonThemeColor(retryBattleButton,UITool.THEME_TYPE_SOLID,this);
 
 
     }

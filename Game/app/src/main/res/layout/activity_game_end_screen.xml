@@ -20,7 +20,7 @@
         app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/background_bright" />
 
-    <View android:id="@+id/rect_overlay"
+    <View android:id="@+id/rect_overlay_gameEnd"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -29,7 +29,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
-        android:background="@color/currentColorTrans"
+        android:background="@color/fire_trans"
         android:visibility="visible"
         />
     <TextView
@@ -50,7 +50,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/currentColor"
+        android:backgroundTint="@color/fire"
         android:text="Retry"
         android:id="@+id/retryBattleButton"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -62,7 +62,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/currentColor"
+        android:backgroundTint="@color/fire"
         android:lines="2"
         android:text="Back to\nstage select"
         android:id="@+id/backToStageButton"

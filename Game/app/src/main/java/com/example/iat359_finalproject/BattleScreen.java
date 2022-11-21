@@ -14,6 +14,7 @@ import android.widget.ProgressBar;
 public class BattleScreen extends AppCompatActivity implements View.OnClickListener {
     Button attackButton,defenceButton,escapeButton,magicButton;
     ImageView enemyIV,characterIV;
+    View battleBG;
     ProgressBar enemyHPProgressBar, characterHPProgressBar;
     int stage;
 
@@ -35,6 +36,8 @@ public class BattleScreen extends AppCompatActivity implements View.OnClickListe
 
         setContentView(R.layout.activity_battle_screen);
 
+        battleBG=findViewById(R.id.rect_overlay_battleBG);
+
         attackButton=findViewById(R.id.attackButton);
         attackButton.setOnClickListener(this);
 
@@ -52,6 +55,12 @@ public class BattleScreen extends AppCompatActivity implements View.OnClickListe
 
         enemyHPProgressBar=findViewById(R.id.enemyHPBar);
         characterHPProgressBar=findViewById(R.id.characterHPBar);
+
+        UITool.setThemeColor(battleBG,UITool.THEME_TYPE_TRANS,this);
+        UITool.setButtonThemeColor(attackButton,UITool.THEME_TYPE_SOLID,this);
+        UITool.setButtonThemeColor(defenceButton,UITool.THEME_TYPE_SOLID,this);
+        UITool.setButtonThemeColor(escapeButton,UITool.THEME_TYPE_SOLID,this);
+        UITool.setButtonThemeColor(magicButton,UITool.THEME_TYPE_SOLID,this);
 
     }
 

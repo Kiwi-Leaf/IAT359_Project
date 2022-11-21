@@ -36,7 +36,7 @@
         android:onClick="gotoSetting"
         android:src="@drawable/settingbutton"/>
 
-    <View android:id="@+id/rect_overlay"
+    <View android:id="@+id/rect_overlay_battleBG"
         android:layout_width="match_parent"
         android:layout_height="400dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -45,7 +45,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
-        android:background="@color/currentColorTrans"
+        android:background="@color/fire_trans"
         android:visibility="visible"
         />
     <TextView
@@ -124,7 +124,7 @@
         android:layout_height="140dp"
         android:id="@+id/attackButton"
 
-        android:backgroundTint="@color/currentColor"
+        android:backgroundTint="@color/fire"
         android:text="Attack"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
@@ -132,7 +132,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@id/rect_overlay"
+        app:layout_constraintStart_toStartOf="@id/rect_overlay_battleBG"
         app:layout_constraintTop_toBottomOf="@id/characterBattleIV"
         app:layout_constraintVertical_bias="0.05"
         />
@@ -141,7 +141,7 @@
         android:layout_height="140dp"
         android:id="@+id/escapeButton"
 
-        android:backgroundTint="@color/currentColor"
+        android:backgroundTint="@color/fire"
         android:text="run"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
@@ -150,7 +150,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/defenceButton"
         app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintStart_toStartOf="@id/rect_overlay"
+        app:layout_constraintStart_toStartOf="@id/rect_overlay_battleBG"
         app:layout_constraintTop_toBottomOf="@id/attackButton"
         app:layout_constraintVertical_bias="0.05"
         />
@@ -160,7 +160,7 @@
         android:layout_height="140dp"
         android:id="@+id/defenceButton"
 
-        android:backgroundTint="@color/currentColor"
+        android:backgroundTint="@color/fire"
         android:text="Defence"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
@@ -177,7 +177,7 @@
         android:layout_height="140dp"
         android:id="@+id/magicButton"
 
-        android:backgroundTint="@color/currentColor"
+        android:backgroundTint="@color/fire"
         android:text="Magic"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"

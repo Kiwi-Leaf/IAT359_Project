@@ -18,10 +18,12 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Switch;
 
 public class StageSelectScreen extends AppCompatActivity implements View.OnClickListener, SensorEventListener{
     Button selectStageButton1,selectStageButton2,selectStageButton3,characterButton;
+    LinearLayout characterLL;
     final int CHARACTER_REQUEST_CODE=1;
 
     float[] light_vals;
@@ -42,6 +44,12 @@ public class StageSelectScreen extends AppCompatActivity implements View.OnClick
         selectStageButton2=findViewById(R.id.stage2Button);
         selectStageButton3=findViewById(R.id.stage3Button);
         characterButton=findViewById(R.id.characterButton);
+        characterLL=findViewById(R.id.stageSelectSecondaryLL);
+
+        UITool.setButtonThemeColor(selectStageButton1,UITool.THEME_TYPE_SOLID,this);
+        UITool.setButtonThemeColor(selectStageButton2,UITool.THEME_TYPE_SOLID,this);
+        UITool.setButtonThemeColor(selectStageButton3,UITool.THEME_TYPE_SOLID,this);
+        UITool.setButtonThemeColor(characterLL,UITool.THEME_TYPE_TRANS,this);
 
         selectStageButton1.setOnClickListener(this);
         selectStageButton2.setOnClickListener(this);

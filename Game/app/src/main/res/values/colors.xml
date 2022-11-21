@@ -7,8 +7,14 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="currentColor">@color/fire</color>
-    <color name="currentColorTrans">@color/fire_trans</color>
     <color name="fire">#ff4f4f</color>
     <color name="fire_trans">#80ff4f4f</color>
+    <color name="water">#235dba</color>
+    <color name="water_trans">#80235dba</color>
+    <color name="electric">#bfab28</color>
+    <color name="electric_trans">#80bfab28</color>
+    <color  name="wind">#37bf28</color>
+    <color name="wind_trans">#8037bf28</color>
+    <color name="earth">#875c16</color>
+    <color name="earth_trans">#80875c16</color>
 </resources>

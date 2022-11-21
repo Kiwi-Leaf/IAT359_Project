@@ -37,7 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:backgroundTint="@color/currentColor"
+            android:backgroundTint="@color/fire"
             android:paddingTop="15dp"
             android:paddingBottom="15dp"
             android:text="Stage 1" />
@@ -47,7 +47,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:backgroundTint="@color/currentColor"
+            android:backgroundTint="@color/fire"
             android:paddingTop="15dp"
             android:paddingBottom="15dp"
             android:text="Stage 2" />
@@ -57,7 +57,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:backgroundTint="@color/currentColor"
+            android:backgroundTint="@color/fire"
             android:paddingTop="15dp"
             android:paddingBottom="15dp"
             android:text="Stage 3" />
@@ -68,7 +68,8 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_below="@id/stageSelectLinearLayout"
-        android:background="@color/currentColorTrans"
+        android:background="@color/fire_trans"
+        android:id="@+id/stageSelectSecondaryLL"
         android:orientation="horizontal">
 
         <ImageButton

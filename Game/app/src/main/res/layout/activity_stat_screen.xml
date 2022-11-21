@@ -26,180 +26,189 @@
         android:id="@+id/cameraButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/currentColor"
+        android:backgroundTint="@color/fire"
         android:layout_centerHorizontal="true"
         android:text="get new character"
         android:layout_below="@id/characterStatIV"
         android:layout_marginTop="20dp"/>
 
-    <View android:id="@+id/rect_overlay"
+    <View android:id="@+id/rect_overlay_statScreen"
         android:layout_width="match_parent"
         android:layout_height="400dp"
         android:layout_alignParentBottom="true"
-        android:background="@color/currentColorTrans"
+        android:background="@color/fire_trans"
         android:visibility="visible"
         />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignTop="@id/rect_overlay"
-        android:gravity="center_horizontal">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:textSize="20dp"
-        android:textStyle="bold"
-
-
-        android:layout_marginTop="30dp"
-        android:text="HP:"
-        android:id="@+id/hpStaticTV"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        android:layout_alignStart="@id/hpStaticTV"
-
-        android:layout_marginTop="15dp"
-        android:layout_below="@id/hpStaticTV"
-        android:text="STR:"
-        android:id="@+id/strStaticTV"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        android:layout_alignStart="@id/hpStaticTV"
-
-        android:layout_marginTop="15dp"
-        android:layout_below="@id/strStaticTV"
-        android:text="INT:"
-        android:id="@+id/intStaticTV"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        android:layout_alignStart="@id/hpStaticTV"
-
-        android:layout_marginTop="15dp"
-        android:layout_below="@id/intStaticTV"
-        android:text="DEF:"
-        android:id="@+id/defStaticTV"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        android:layout_alignStart="@id/hpStaticTV"
-
-        android:layout_marginTop="15dp"
-        android:layout_below="@id/defStaticTV"
-        android:text="SPD:"
-        android:id="@+id/spdStaticTV"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:textSize="20dp"
-        android:layout_marginLeft="100dp"
-
-        android:layout_marginTop="15dp"
-        android:layout_alignBaseline="@id/hpStaticTV"
-        android:layout_toRightOf="@id/hpStaticTV"
-        android:text="[hp]"
-        android:id="@+id/hpTV"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:textSize="20dp"
-
-        android:layout_marginTop="15dp"
-        android:layout_alignBaseline="@id/strStaticTV"
-        android:layout_alignStart="@id/hpTV"
-        android:text="[str]"
-        android:id="@+id/strTV"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:textSize="20dp"
-
-        android:layout_marginTop="15dp"
-        android:layout_alignBaseline="@id/intStaticTV"
-        android:layout_alignStart="@id/hpTV"
-        android:text="[int]"
-        android:id="@+id/intTV"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:textSize="20dp"
-
-        android:layout_marginTop="15dp"
-        android:layout_alignBaseline="@id/defStaticTV"
-        android:layout_alignStart="@id/hpTV"
-        android:text="[def]"
-        android:id="@+id/defTV"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:textSize="20dp"
-
-        android:layout_marginTop="15dp"
-        android:layout_alignBaseline="@id/spdStaticTV"
-        android:layout_alignStart="@id/hpTV"
-        android:text="[spd]"
-        android:id="@+id/spdTV"/>
+        android:layout_alignTop="@id/rect_overlay_statScreen"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="-1dp"
+        android:layout_marginBottom="1dp"
+        android:gravity="center_horizontal"
+        >
 
         <TextView
+            android:id="@+id/hpStaticTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textSize="20dp"
-            android:textColor="@color/white"
-            android:id="@+id/keepCharacterTV"
+            android:layout_marginTop="30dp"
+            android:text="HP:"
 
+
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/strStaticTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/hpStaticTV"
+            android:layout_alignStart="@id/hpStaticTV"
+            android:layout_marginTop="15dp"
+
+            android:text="STR:"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/intStaticTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/strStaticTV"
+            android:layout_alignStart="@id/hpStaticTV"
+            android:layout_marginTop="15dp"
+
+            android:text="INT:"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/defStaticTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/intStaticTV"
+            android:layout_alignStart="@id/hpStaticTV"
+            android:layout_marginTop="15dp"
+
+            android:text="DEF:"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/spdStaticTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/defStaticTV"
+            android:layout_alignStart="@id/hpStaticTV"
+            android:layout_marginTop="15dp"
+
+            android:text="SPD:"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/hpTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/hpStaticTV"
+            android:layout_marginLeft="100dp"
+
+            android:layout_marginTop="15dp"
+            android:layout_toRightOf="@id/hpStaticTV"
+            android:text="[hp]"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/strTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/strStaticTV"
+
+            android:layout_alignStart="@id/hpTV"
+            android:layout_marginTop="15dp"
+            android:text="[str]"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/intTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/intStaticTV"
+
+            android:layout_alignStart="@id/hpTV"
+            android:layout_marginTop="15dp"
+            android:text="[int]"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/defTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/defStaticTV"
+
+            android:layout_alignStart="@id/hpTV"
+            android:layout_marginTop="15dp"
+            android:text="[def]"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/spdTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/spdStaticTV"
+
+            android:layout_alignStart="@id/hpTV"
+            android:layout_marginTop="15dp"
+            android:text="[spd]"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/keepCharacterTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_below="@id/spdStaticTV"
             android:layout_marginTop="20dp"
-            android:text="Keep this character?"/>
+            android:text="Keep this character?"
+
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:textStyle="bold" />
 
 
         <Button
+            android:id="@+id/saveNewCharacterButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/currentColor"
-
-            android:layout_marginLeft="40dp"
-            android:text="Save"
 
             android:layout_below="@id/keepCharacterTV"
-            android:id="@+id/saveNewCharacterButton"/>
+            android:layout_marginLeft="40dp"
+
+            android:backgroundTint="@color/fire"
+            android:text="Save" />
+
         <Button
+            android:id="@+id/cancelNewCharacterButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/currentColor"
 
-            android:text="cancel"
             android:layout_below="@id/saveNewCharacterButton"
             android:layout_alignStart="@id/saveNewCharacterButton"
-            android:id="@+id/cancelNewCharacterButton"/>
+            android:backgroundTint="@color/fire"
+            android:text="cancel" />
     </RelativeLayout>
 
 

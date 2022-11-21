@@ -26,6 +26,7 @@
         android:layout_height="match_parent"
         android:layout_marginTop="40dp"
         android:layout_marginBottom="70dp"
+        android:id="@+id/settingBackground"
         android:background="@color/fire_trans"
         android:orientation="vertical">
         <TextView
@@ -46,6 +47,7 @@
             android:padding="15dp"
             android:orientation="horizontal"
             android:gravity="center"
+            android:id="@+id/settingItem1"
             android:background="@color/fire">
 
             <TextView
@@ -73,6 +75,7 @@
             android:padding="15dp"
             android:orientation="horizontal"
             android:gravity="center"
+            android:id="@+id/settingItem2"
             android:background="@color/fire">
 
             <TextView
@@ -100,6 +103,7 @@
             android:padding="15dp"
             android:orientation="horizontal"
             android:gravity="center"
+            android:id="@+id/settingItem3"
             android:background="@color/fire">
 
             <TextView
@@ -127,6 +131,7 @@
             android:padding="15dp"
             android:orientation="horizontal"
             android:gravity="center"
+            android:id="@+id/settingItem4"
             android:background="@color/fire">
 
             <TextView

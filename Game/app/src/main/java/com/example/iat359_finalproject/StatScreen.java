@@ -24,6 +24,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +36,7 @@ import java.util.Date;
 public class StatScreen extends AppCompatActivity implements View.OnClickListener{
     // Show current character when entered
     TextView hpTV,strTV,intTV,defTV,spdTV;
+    View characterStatRL;
     ImageView charIV;
     Button saveButton,cancelButton,cameraButton;
 
@@ -70,10 +72,17 @@ public class StatScreen extends AppCompatActivity implements View.OnClickListene
         saveButton=findViewById(R.id.saveNewCharacterButton);
         cancelButton=findViewById(R.id.cancelNewCharacterButton);
         cameraButton=findViewById(R.id.cameraButton);
+        characterStatRL=findViewById(R.id.rect_overlay_statScreen);
 
+        saveButton.setOnClickListener(this);
         saveButton.setOnClickListener(this);
         cancelButton.setOnClickListener(this);
         cameraButton.setOnClickListener(this);
+
+        UITool.setButtonThemeColor(saveButton,UITool.THEME_TYPE_SOLID,this);
+        UITool.setButtonThemeColor(cancelButton,UITool.THEME_TYPE_SOLID,this);
+        UITool.setButtonThemeColor(cameraButton,UITool.THEME_TYPE_SOLID,this);
+        UITool.setThemeColor(characterStatRL,UITool.THEME_TYPE_TRANS,this);
 
     }
 
