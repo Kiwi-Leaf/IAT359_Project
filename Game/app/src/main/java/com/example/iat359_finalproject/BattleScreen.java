@@ -21,7 +21,7 @@ public class BattleScreen extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_battle_screen);
+
 
         if (this.getIntent().hasExtra("BATTLE")){
             stage=this.getIntent().getExtras().getInt("BATTLE");
@@ -33,6 +33,8 @@ public class BattleScreen extends AppCompatActivity implements View.OnClickListe
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
 
+        setContentView(R.layout.activity_battle_screen);
+
         attackButton=findViewById(R.id.attackButton);
         attackButton.setOnClickListener(this);
 
@@ -42,11 +44,11 @@ public class BattleScreen extends AppCompatActivity implements View.OnClickListe
         escapeButton=findViewById(R.id.escapeButton);
         escapeButton.setOnClickListener(this);
 
-        magicButton.findViewById(R.id.magicButton);
+        magicButton=findViewById(R.id.magicButton);
         magicButton.setOnClickListener(this);
 
-        enemyIV.findViewById(R.id.enemyIV);
-        characterIV.findViewById(R.id.characterBattleIV);
+        enemyIV=findViewById(R.id.enemyIV);
+        characterIV=findViewById(R.id.characterBattleIV);
 
         enemyHPProgressBar=findViewById(R.id.enemyHPBar);
         characterHPProgressBar=findViewById(R.id.characterHPBar);

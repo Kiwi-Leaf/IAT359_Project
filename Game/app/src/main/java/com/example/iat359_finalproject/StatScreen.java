@@ -8,11 +8,16 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.View;
 import android.view.Window;
@@ -22,25 +27,37 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class StatScreen extends AppCompatActivity implements View.OnClickListener {
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class StatScreen extends AppCompatActivity implements View.OnClickListener{
     // Show current character when entered
     TextView hpTV,strTV,intTV,defTV,spdTV;
     ImageView charIV;
     Button saveButton,cancelButton,cameraButton;
+
+    String currentPhotoPath;
+
     private int REQUEST_CODE_PERMISSIONS = 101;
     private final String[] REQUIRED_PERMISSIONS = new String[]{"android.permission.CAMERA"};
 
     //this bool is for flagging the select battle page to update the character
     boolean madeChange;
 
+    //https://developer.android.com/training/camera-deprecated/photobasics#java how to store locally
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_stat_screen);
+
         //Hide the action bar on top
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
+
+        setContentView(R.layout.activity_stat_screen);
 
         hpTV=findViewById(R.id.hpTV);
         strTV=findViewById(R.id.strTV);
@@ -58,6 +75,26 @@ public class StatScreen extends AppCompatActivity implements View.OnClickListene
         cancelButton.setOnClickListener(this);
         cameraButton.setOnClickListener(this);
 
+    }
+
+    //see citation above
+    //https://stackoverflow.com/questions/60027883/take-photo-in-android-app-and-save-it-into-gallery
+    //https://stackoverflow.com/questions/14053338/save-bitmap-in-android-as-jpeg-in-external-storage-in-a-folder
+    //storing as jpg
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
+
+        // Save a file: path for use with ACTION_VIEW intents
+        currentPhotoPath = image.getAbsolutePath();
+        return image;
     }
 
 
@@ -113,14 +150,43 @@ public class StatScreen extends AppCompatActivity implements View.OnClickListene
         }
         return true;
     }
+    //see citation above
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if(allPermissionsGranted()){
             Intent camera_intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            resultlauncher.launch(camera_intent);
+            if (camera_intent.resolveActivity(getPackageManager()) != null) {
+                // Create the File where the photo should go
+                File photoFile = null;
+
+                try {
+                    photoFile = createImageFile();
+                } catch (IOException ex) {
+                    // Error occurred while creating the File
+                    Toast.makeText(this, "No Photo File", Toast.LENGTH_SHORT).show();
+                }
+                // Continue only if the File was successfully created
+                if (photoFile != null) {
+                    Uri photoURI = FileProvider.getUriForFile(this,
+                            "com.example.android.fileprovider", photoFile);
+                    camera_intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                    Toast.makeText(this, photoURI.toString(), Toast.LENGTH_LONG).show();
+                    resultlauncher.launch(camera_intent);
+                }
+            }
         } else{
             Toast.makeText(this, "Permissions not granted by the user.", Toast.LENGTH_SHORT).show();
             finish();
         }
     }
+
+    //see above citation
+    public void galleryAddPic() {
+        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        File f = new File(currentPhotoPath);
+        Uri contentUri = Uri.fromFile(f);
+        mediaScanIntent.setData(contentUri);
+        this.sendBroadcast(mediaScanIntent);
+    }
+
 }

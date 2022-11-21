@@ -9,6 +9,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -16,9 +20,13 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Switch;
 
-public class StageSelectScreen extends AppCompatActivity implements View.OnClickListener {
+public class StageSelectScreen extends AppCompatActivity implements View.OnClickListener, SensorEventListener{
     Button selectStageButton1,selectStageButton2,selectStageButton3,characterButton;
     final int CHARACTER_REQUEST_CODE=1;
+
+    float[] light_vals;
+    public SensorManager mySensorManager;
+    public Sensor myLightSensor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +47,12 @@ public class StageSelectScreen extends AppCompatActivity implements View.OnClick
         selectStageButton2.setOnClickListener(this);
         selectStageButton3.setOnClickListener(this);
         characterButton.setOnClickListener(this);
+
+        mySensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        Sensor myLightSensor = mySensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
+        if(myLightSensor != null) {
+            mySensorManager.registerListener(this, myLightSensor, mySensorManager.SENSOR_DELAY_NORMAL);
+        }
 
     }
 
@@ -95,4 +109,14 @@ public class StageSelectScreen extends AppCompatActivity implements View.OnClick
             }
 
     );
+
+    @Override
+    public void onSensorChanged(SensorEvent sensorEvent) {
+
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int i) {
+
+    }
 }

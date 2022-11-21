@@ -14,6 +14,7 @@ import android.widget.ImageButton;
 import java.util.Set;
 public class MainActivity extends AppCompatActivity {
     ImageButton battleButton, hallButton, settingButton;
+    EnemyDatabase edb;
 
 
     @Override
@@ -29,10 +30,13 @@ public class MainActivity extends AppCompatActivity {
         battleButton=findViewById(R.id.battleButton);
         hallButton=findViewById(R.id.hallOfFrameButton);
 
-
+        edb = new EnemyDatabase(this);
+//        edb = new EnemyDatabase(this);
 
         setContentView(R.layout.activity_main);
+
     }
+
 
     public void gotoHallOfFrame(View v){
         Intent hof= new Intent(this, HallOfFrameScreen.class );
