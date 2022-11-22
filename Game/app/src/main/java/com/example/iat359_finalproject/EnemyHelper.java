@@ -35,25 +35,25 @@ public class EnemyHelper extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onCreate(SQLiteDatabase db) {
+    public void onCreate(SQLiteDatabase edb) {
         try {
-            db.execSQL(CREATE_TABLE);
+            edb.execSQL(CREATE_TABLE);
             Toast.makeText(context, "onCreate() called", Toast.LENGTH_LONG).show();
-            db.execSQL(INITIALIZE_EDB);
+            edb.execSQL(INITIALIZE_EDB);
             Toast.makeText(context, "Intial data added", Toast.LENGTH_LONG).show();
         } catch (SQLException e) {
-            Toast.makeText(context, "exception onCreate() db", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "exception onCreate() edb", Toast.LENGTH_LONG).show();
         }
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+    public void onUpgrade(SQLiteDatabase edb, int oldVersion, int newVersion) {
         try {
-            db.execSQL(DROP_TABLE);
-            onCreate(db);
+            edb.execSQL(DROP_TABLE);
+            onCreate(edb);
             Toast.makeText(context, "onUpgrade called", Toast.LENGTH_LONG).show();
         } catch (SQLException e) {
-            Toast.makeText(context, "exception onUpgrade() db", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "exception onUpgrade() edb", Toast.LENGTH_LONG).show();
         }
     }
 

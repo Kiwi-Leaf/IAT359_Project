@@ -15,6 +15,9 @@ import java.util.Set;
 public class MainActivity extends AppCompatActivity {
     ImageButton battleButton, hallButton, settingButton;
     EnemyDatabase edb;
+    PlayerDatabase pdb;
+    EnemyHelper eHelper;
+    PlayerHelper pHelper;
 
 
     @Override
@@ -31,7 +34,9 @@ public class MainActivity extends AppCompatActivity {
         hallButton=findViewById(R.id.hallOfFrameButton);
 
         edb = new EnemyDatabase(this);
-//        edb = new EnemyDatabase(this);
+        eHelper = new EnemyHelper(this);
+        pdb = new PlayerDatabase(this);
+        pHelper = new PlayerHelper(this);
 
         setContentView(R.layout.activity_main);
 

@@ -144,9 +144,9 @@ public class StageSelectScreen extends AppCompatActivity implements View.OnClick
 
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
-        int type=event.sensor.getType();
+        int type=sensorEvent.sensor.getType();
         if (type ==Sensor.TYPE_LIGHT){
-            brightness=event.values[0];
+            brightness= (int) sensorEvent.values[0];
         }
 
     }

@@ -6,6 +6,7 @@ public class PlayerConstants {
     public static final String UID = "_id";
     public static final String NAME = "Name";
     public static final String LEVEL = "lv";
+    public static final String ELEMENT = "elem";
     public static final String BASE_HP = "hp";
     public static final String ATTACK = "atk";
     public static final String DEFENSE = "def";

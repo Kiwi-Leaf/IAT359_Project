@@ -47,6 +47,10 @@ public class StatScreen extends AppCompatActivity implements View.OnClickListene
 
     //this bool is for flagging the select battle page to update the character
     boolean madeChange;
+    EnemyDatabase edb;
+    PlayerDatabase pdb;
+    EnemyHelper eHelper;
+    PlayerHelper pHelper;
 
     //https://developer.android.com/training/camera-deprecated/photobasics#java how to store locally
 
@@ -83,6 +87,11 @@ public class StatScreen extends AppCompatActivity implements View.OnClickListene
         UITool.setButtonThemeColor(cancelButton,UITool.THEME_TYPE_SOLID,this);
         UITool.setButtonThemeColor(cameraButton,UITool.THEME_TYPE_SOLID,this);
         UITool.setThemeColor(characterStatRL,UITool.THEME_TYPE_TRANS,this);
+
+        edb = new EnemyDatabase(this);
+        eHelper = new EnemyHelper(this);
+        pdb = new PlayerDatabase(this);
+        pHelper = new PlayerHelper(this);
 
     }
     @Override
@@ -122,6 +131,7 @@ public class StatScreen extends AppCompatActivity implements View.OnClickListene
                 //save this character to database
 
                 madeChange=true;
+                addCharacter();
                 break;
             case (R.id.cancelNewCharacterButton):
                 madeChange=false;
@@ -137,6 +147,35 @@ public class StatScreen extends AppCompatActivity implements View.OnClickListene
 
 
         }
+
+    }
+public void addCharacter(){
+
+    int hp, str, inte, def, spd;
+
+    hp = 8 + (int)(Math.random() * ((14 - 8) + 1));
+    str = 8 + (int)(Math.random() * ((14 - 8) + 1));
+    inte = 8 + (int)(Math.random() * ((14 - 8) + 1));
+    def = 8 + (int)(Math.random() * ((14 - 8) + 1));
+    spd = 8 + (int)(Math.random() * ((14 - 8) + 1));
+
+    long id = pdb.insertData("TempName", "Fire", 1,hp,str, def, inte, spd, 0, "drawable/cat_electric.png");
+    Toast.makeText(this, "ID: " + id, Toast.LENGTH_SHORT).show();
+    if (id < 0)
+    {
+        Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show();
+    }
+    else
+    {
+        Toast.makeText(this, "success", Toast.LENGTH_SHORT).show();
+    }
+
+
+    hpTV.setText(String.valueOf(hp));
+    strTV.setText(String.valueOf(str));
+    intTV.setText(String.valueOf(inte));
+    spdTV.setText(String.valueOf(spd));
+    defTV.setText(String.valueOf(def));
 
     }
 

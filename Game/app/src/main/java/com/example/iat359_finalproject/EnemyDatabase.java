@@ -10,9 +10,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-/**
- * Created by helmine on 2015-02-04. updated by hanieh in 2022.
- */
 public class EnemyDatabase {
     private SQLiteDatabase edb;
     private Context context;
@@ -53,12 +50,11 @@ public class EnemyDatabase {
 
     public Cursor getSelectedData(String name, String cycle)
     {
-        //select plants from database of type 'herb'
-        SQLiteDatabase db = helper.getWritableDatabase();
+        SQLiteDatabase edb = helper.getWritableDatabase();
         String[] columns = {EnemyConstants.UID, EnemyConstants.NAME, EnemyConstants.ELEMENT, EnemyConstants.BASE_HP,EnemyConstants.ATTACK, EnemyConstants.DEFENSE, EnemyConstants.INTELLIGENCE, EnemyConstants.SPEED, EnemyConstants.TIME_CYCLE, EnemyConstants.FILE_PATH};
 
         String selection = EnemyConstants.NAME + "='" +name+ "' AND " + EnemyConstants.TIME_CYCLE + "='" +cycle+ "'";
-        Cursor cursor = db.query(EnemyConstants.TABLE_NAME, columns, selection, null, null, null, null);
+        Cursor cursor = edb.query(EnemyConstants.TABLE_NAME, columns, selection, null, null, null, null);
         return cursor;
 
     }

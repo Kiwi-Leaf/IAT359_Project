@@ -21,6 +21,7 @@ public class PlayerHelper extends SQLiteOpenHelper {
                     PlayerConstants.TABLE_NAME + " (" +
                     PlayerConstants.UID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     PlayerConstants.NAME + " TEXT, " +
+                    PlayerConstants.ELEMENT + " TEXT, " +
                     PlayerConstants.LEVEL + " TEXT, " +
                     PlayerConstants.BASE_HP + " TEXT, " +
                     PlayerConstants.ATTACK + " TEXT, " +
@@ -38,20 +39,20 @@ public class PlayerHelper extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onCreate(SQLiteDatabase db) {
+    public void onCreate(SQLiteDatabase pdb) {
         try {
-            db.execSQL(CREATE_TABLE);
+            pdb.execSQL(CREATE_TABLE);
             Toast.makeText(context, "onCreate() called", Toast.LENGTH_LONG).show();
         } catch (SQLException e) {
-            Toast.makeText(context, "exception onCreate() db", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "exception onCreate() pdb", Toast.LENGTH_LONG).show();
         }
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+    public void onUpgrade(SQLiteDatabase pdb, int oldVersion, int newVersion) {
         try {
-            db.execSQL(DROP_TABLE);
-            onCreate(db);
+            pdb.execSQL(DROP_TABLE);
+            onCreate(pdb);
             Toast.makeText(context, "onUpgrade called", Toast.LENGTH_LONG).show();
         } catch (SQLException e) {
             Toast.makeText(context, "exception onUpgrade() db", Toast.LENGTH_LONG).show();
