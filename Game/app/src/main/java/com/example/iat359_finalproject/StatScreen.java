@@ -160,6 +160,11 @@ public void addCharacter(){
 
     int hp, str, inte, def, spd;
 
+    int level = 1;
+
+    String name = characterNameET.getText().toString();
+
+
     hp = 8 + (int)(Math.random() * ((14 - 8) + 1));
     str = 8 + (int)(Math.random() * ((14 - 8) + 1));
     inte = 8 + (int)(Math.random() * ((14 - 8) + 1));
@@ -172,7 +177,7 @@ public void addCharacter(){
     String type= UITool.isType(typeRan);
 
 
-    long id = pdb.insertData("TempName", type, 1,hp,str, def, inte, spd, 0, "drawable/cat_electric.png");
+    long id = pdb.insertData(name, type, level,hp,str, def, inte, spd, 0, "drawable/cat_electric.png");
     Toast.makeText(this, "ID: " + id, Toast.LENGTH_SHORT).show();
     if (id < 0)
     {
@@ -189,6 +194,8 @@ public void addCharacter(){
     intTV.setText(String.valueOf(inte));
     spdTV.setText(String.valueOf(spd));
     defTV.setText(String.valueOf(def));
+    typeTV.setText(type);
+    lvTV.setText(String.valueOf(level));
 
     }
 
