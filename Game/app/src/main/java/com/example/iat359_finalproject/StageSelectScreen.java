@@ -49,7 +49,7 @@ public class StageSelectScreen extends AppCompatActivity implements View.OnClick
         UITool.setButtonThemeColor(selectStageButton1,UITool.THEME_TYPE_SOLID,this);
         UITool.setButtonThemeColor(selectStageButton2,UITool.THEME_TYPE_SOLID,this);
         UITool.setButtonThemeColor(selectStageButton3,UITool.THEME_TYPE_SOLID,this);
-        UITool.setButtonThemeColor(characterLL,UITool.THEME_TYPE_TRANS,this);
+        UITool.setThemeColor(characterLL,UITool.THEME_TYPE_TRANS,this);
 
         selectStageButton1.setOnClickListener(this);
         selectStageButton2.setOnClickListener(this);

@@ -3,8 +3,10 @@ package com.example.iat359_finalproject;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 public class UITool {
     public static final int THEME_FIRE = 0;
@@ -28,7 +30,7 @@ public class UITool {
         v.setLayoutParams(params);
     }
 
-    public static void setButtonThemeColor(View view, int type, Activity a) {
+    public static void setButtonThemeColor(Button view, int type, Activity a) {
         SharedPreferences sharedPrefs = a.getSharedPreferences("CaptureFightData", Context.MODE_PRIVATE);
         int currentColor = sharedPrefs.getInt("theme", 0);
         switch (currentColor) {
@@ -69,6 +71,7 @@ public class UITool {
                 break;
 
         }
+       view.setTextColor(Color.parseColor("#ffffff"));
 
     }
 

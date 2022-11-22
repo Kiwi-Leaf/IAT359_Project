@@ -42,6 +42,18 @@ public class SettingScreen extends AppCompatActivity implements AdapterView.OnIt
         item2LL=findViewById(R.id.settingItem2);
         item3LL=findViewById(R.id.settingItem3);
         item4LL=findViewById(R.id.settingItem4);
+
+        SharedPreferences sharedPrefs = getSharedPreferences("CaptureFightData", Context.MODE_PRIVATE);
+        int currentColor = sharedPrefs.getInt("theme", 0);
+        themeSpinner.setSelection(currentColor);
+        UITool.setThemeColor(mainBackgroundLL,UITool.THEME_TYPE_TRANS,this);
+        UITool.setThemeColor(item1LL,UITool.THEME_TYPE_SOLID,this);
+        UITool.setThemeColor(item2LL,UITool.THEME_TYPE_SOLID,this);
+        UITool.setThemeColor(item3LL,UITool.THEME_TYPE_SOLID,this);
+        UITool.setThemeColor(item4LL,UITool.THEME_TYPE_SOLID,this);
+
+
+
     }
 
     @Override
