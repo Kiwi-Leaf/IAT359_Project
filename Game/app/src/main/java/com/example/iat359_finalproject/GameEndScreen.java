@@ -18,12 +18,14 @@ public class GameEndScreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_game_end_screen);
+
 
         //Hide the action bar on top
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
+
+        setContentView(R.layout.activity_game_end_screen);
 
         retryBattleButton=findViewById(R.id.retryBattleButton);
         backToStageButton=findViewById(R.id.backToStageButton);

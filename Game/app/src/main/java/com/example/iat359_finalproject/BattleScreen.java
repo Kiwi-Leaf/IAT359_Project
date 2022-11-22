@@ -68,6 +68,15 @@ public class BattleScreen extends AppCompatActivity implements View.OnClickListe
         Intent setting = new Intent(this, SettingScreen.class);
         startActivity(setting);
     }
+    @Override
+    public void onRestart() {
+        super.onRestart();
+        UITool.setThemeColor(battleBG,UITool.THEME_TYPE_TRANS,this);
+        UITool.setButtonThemeColor(attackButton,UITool.THEME_TYPE_SOLID,this);
+        UITool.setButtonThemeColor(defenceButton,UITool.THEME_TYPE_SOLID,this);
+        UITool.setButtonThemeColor(escapeButton,UITool.THEME_TYPE_SOLID,this);
+        UITool.setButtonThemeColor(magicButton,UITool.THEME_TYPE_SOLID,this);
+    }
 
     @Override
     public void onClick(View view) {

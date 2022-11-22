@@ -85,6 +85,14 @@ public class StatScreen extends AppCompatActivity implements View.OnClickListene
         UITool.setThemeColor(characterStatRL,UITool.THEME_TYPE_TRANS,this);
 
     }
+    @Override
+    public void onRestart() {
+        super.onRestart();
+        UITool.setButtonThemeColor(saveButton,UITool.THEME_TYPE_SOLID,this);
+        UITool.setButtonThemeColor(cancelButton,UITool.THEME_TYPE_SOLID,this);
+        UITool.setButtonThemeColor(cameraButton,UITool.THEME_TYPE_SOLID,this);
+        UITool.setThemeColor(characterStatRL,UITool.THEME_TYPE_TRANS,this);
+    }
 
     //see citation above
     //https://stackoverflow.com/questions/60027883/take-photo-in-android-app-and-save-it-into-gallery

@@ -65,6 +65,15 @@ public class StageSelectScreen extends AppCompatActivity implements View.OnClick
     }
 
     @Override
+    public void onRestart() {
+        super.onRestart();
+        UITool.setButtonThemeColor(selectStageButton1,UITool.THEME_TYPE_SOLID,this);
+        UITool.setButtonThemeColor(selectStageButton2,UITool.THEME_TYPE_SOLID,this);
+        UITool.setButtonThemeColor(selectStageButton3,UITool.THEME_TYPE_SOLID,this);
+        UITool.setThemeColor(characterLL,UITool.THEME_TYPE_TRANS,this);
+    }
+
+    @Override
     public void onClick(View view) {
         Intent intent ;
         switch (view.getId()){
