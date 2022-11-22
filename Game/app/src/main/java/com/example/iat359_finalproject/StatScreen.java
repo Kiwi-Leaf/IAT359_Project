@@ -32,10 +32,11 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Random;
 
 public class StatScreen extends AppCompatActivity implements View.OnClickListener{
     // Show current character when entered
-    TextView hpTV,strTV,intTV,defTV,spdTV;
+    TextView hpTV,strTV,intTV,defTV,spdTV,lvTV;
     View characterStatRL;
     ImageView charIV;
     Button saveButton,cancelButton,cameraButton;
@@ -70,6 +71,7 @@ public class StatScreen extends AppCompatActivity implements View.OnClickListene
         intTV=findViewById(R.id.intTV);
         defTV=findViewById(R.id.defTV);
         spdTV=findViewById(R.id.spdTV);
+        lvTV=findViewById(R.id.lvTV);
 
         charIV=findViewById(R.id.characterStatIV);
 
@@ -159,7 +161,13 @@ public void addCharacter(){
     def = 8 + (int)(Math.random() * ((14 - 8) + 1));
     spd = 8 + (int)(Math.random() * ((14 - 8) + 1));
 
-    long id = pdb.insertData("TempName", "Fire", 1,hp,str, def, inte, spd, 0, "drawable/cat_electric.png");
+    //create random number for element type
+    Random random= new Random();
+    int typeRan= random.nextInt(5);
+    String type= UITool.isType(typeRan);
+
+
+    long id = pdb.insertData("TempName", type, 1,hp,str, def, inte, spd, 0, "drawable/cat_electric.png");
     Toast.makeText(this, "ID: " + id, Toast.LENGTH_SHORT).show();
     if (id < 0)
     {

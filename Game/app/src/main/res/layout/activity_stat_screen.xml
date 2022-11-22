@@ -50,12 +50,43 @@
         android:layout_marginBottom="1dp"
         android:gravity="center_horizontal"
         >
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name your character"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:id="@+id/characterNameET"/>
+        <TextView
+            android:id="@+id/lvStaticTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/characterNameET"
+            android:text="LV:"
+
+
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/lvTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/lvStaticTV"
+
+            android:layout_alignStart="@id/hpTV"
+            android:layout_marginTop="15dp"
+            android:text="[lv]"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/hpStaticTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_below="@+id/lvStaticTV"
             android:text="HP:"
 
 
@@ -195,7 +226,7 @@
             android:layout_height="wrap_content"
 
             android:layout_below="@id/keepCharacterTV"
-            android:layout_marginLeft="40dp"
+            android:layout_marginLeft="0dp"
 
             android:backgroundTint="@color/fire"
             android:text="Save" />
@@ -204,9 +235,9 @@
             android:id="@+id/cancelNewCharacterButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
-            android:layout_below="@id/saveNewCharacterButton"
-            android:layout_alignStart="@id/saveNewCharacterButton"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@id/saveNewCharacterButton"
+            android:layout_alignTop="@id/saveNewCharacterButton"
             android:backgroundTint="@color/fire"
             android:text="cancel" />
     </RelativeLayout>

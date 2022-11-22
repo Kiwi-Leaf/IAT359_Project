@@ -30,6 +30,29 @@ public class UITool {
         v.setLayoutParams(params);
     }
 
+    public static String isType(int i){
+        String type="Fire";
+        switch (i) {
+            case UITool.THEME_FIRE:
+                type="Fire";
+                break;
+            case UITool.THEME_WATER:
+               type="Water";
+                break;
+            case UITool.THEME_ELECTRIC:
+              type="Electric";
+                break;
+            case UITool.THEME_WIND:
+               type="Wind";
+                break;
+            case UITool.THEME_EARTH:
+              type="Earth";
+                break;
+        }
+
+        return type;
+    }
+
     public static void setButtonThemeColor(Button view, int type, Activity a) {
         SharedPreferences sharedPrefs = a.getSharedPreferences("CaptureFightData", Context.MODE_PRIVATE);
         int currentColor = sharedPrefs.getInt("theme", 0);
