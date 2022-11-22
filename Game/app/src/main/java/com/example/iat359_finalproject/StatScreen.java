@@ -23,6 +23,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -36,7 +37,8 @@ import java.util.Random;
 
 public class StatScreen extends AppCompatActivity implements View.OnClickListener{
     // Show current character when entered
-    TextView hpTV,strTV,intTV,defTV,spdTV,lvTV;
+    TextView hpTV,strTV,intTV,defTV,spdTV,lvTV,typeTV;
+    EditText characterNameET;
     View characterStatRL;
     ImageView charIV;
     Button saveButton,cancelButton,cameraButton;
@@ -72,6 +74,9 @@ public class StatScreen extends AppCompatActivity implements View.OnClickListene
         defTV=findViewById(R.id.defTV);
         spdTV=findViewById(R.id.spdTV);
         lvTV=findViewById(R.id.lvTV);
+        typeTV=findViewById(R.id.typeTV);
+
+        characterNameET=findViewById(R.id.characterNameET);
 
         charIV=findViewById(R.id.characterStatIV);
 

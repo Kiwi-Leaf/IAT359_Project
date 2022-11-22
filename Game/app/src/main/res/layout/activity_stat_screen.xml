@@ -31,6 +31,17 @@
         android:text="get new character"
         android:layout_below="@id/characterStatIV"
         android:layout_marginTop="20dp"/>
+    <EditText
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:hint="Name your character"
+        android:textColorHint="@color/white"
+        android:textStyle="bold"
+        android:id="@+id/characterNameET"
+        android:layout_centerHorizontal="true"
+        android:maxLength="25"
+        android:textAlignment="center"
+        android:layout_above="@id/rect_overlay_statScreen"/>
 
     <View android:id="@+id/rect_overlay_statScreen"
         android:layout_width="match_parent"
@@ -39,6 +50,7 @@
         android:background="@color/fire_trans"
         android:visibility="visible"
         />
+
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -50,22 +62,34 @@
         android:layout_marginBottom="1dp"
         android:gravity="center_horizontal"
         >
-        <EditText
+
+        <TextView
+            android:id="@+id/typeStaticTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Name your character"
+            android:layout_marginTop="5dp"
+
+            android:text="TYPE:"
             android:textColor="@color/white"
-            android:textStyle="bold"
-            android:id="@+id/characterNameET"/>
+            android:textSize="20dp"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/typeTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/typeStaticTV"
+            android:layout_alignStart="@id/hpTV"
+            android:layout_marginTop="15dp"
+            android:text="[type]"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
         <TextView
             android:id="@+id/lvStaticTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:layout_below="@id/characterNameET"
+            android:layout_below="@id/typeStaticTV"
             android:text="LV:"
-
-
             android:textColor="@color/white"
             android:textSize="20dp"
             android:textStyle="bold"/>
