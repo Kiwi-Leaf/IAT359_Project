@@ -29,6 +29,7 @@ public class StageSelectScreen extends AppCompatActivity implements View.OnClick
     float[] light_vals;
     public SensorManager mySensorManager;
     public Sensor myLightSensor;
+    int brightness;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +72,20 @@ public class StageSelectScreen extends AppCompatActivity implements View.OnClick
         UITool.setButtonThemeColor(selectStageButton2,UITool.THEME_TYPE_SOLID,this);
         UITool.setButtonThemeColor(selectStageButton3,UITool.THEME_TYPE_SOLID,this);
         UITool.setThemeColor(characterLL,UITool.THEME_TYPE_TRANS,this);
+    }
+    
+    @Override
+    public void onResume(){
+        super.onResume();
+        if(myLightSensor != null) {
+            mySensorManager.registerListener(this, myLightSensor, mySensorManager.SENSOR_DELAY_NORMAL);
+        }
+        
+    }
+    @Override
+    public void onPause(){
+        super.onPause();
+        mySensorManager.unregisterListener(this);
     }
 
     @Override
@@ -129,6 +144,10 @@ public class StageSelectScreen extends AppCompatActivity implements View.OnClick
 
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
+        int type=event.sensor.getType();
+        if (type ==Sensor.TYPE_LIGHT){
+            brightness=event.values[0];
+        }
 
     }
 
