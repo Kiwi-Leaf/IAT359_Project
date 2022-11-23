@@ -1,9 +1,11 @@
 package com.example.iat359_finalproject;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -13,21 +15,16 @@ import android.widget.ProgressBar;
 
 public class BattleScreen extends AppCompatActivity implements View.OnClickListener {
     Button attackButton,defenceButton,escapeButton,magicButton;
-    ImageView enemyIV,characterIV;
+    ImageView enemyIV,characterIV,bgIV;
     View battleBG;
     ProgressBar enemyHPProgressBar, characterHPProgressBar;
     int stage;
+    boolean isBright;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
-        if (this.getIntent().hasExtra("BATTLE")){
-            stage=this.getIntent().getExtras().getInt("BATTLE");
-            //and set up the stage with int number
-        }
 
         //Hide the action bar on top
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -35,6 +32,23 @@ public class BattleScreen extends AppCompatActivity implements View.OnClickListe
         getSupportActionBar().hide();
 
         setContentView(R.layout.activity_battle_screen);
+
+        bgIV=findViewById(R.id.battleBackgroundIV);
+
+        if (this.getIntent().hasExtra("BATTLE")){
+            stage=this.getIntent().getExtras().getInt("BATTLE");
+            //and set up the stage with int number
+        }
+        if (this.getIntent().hasExtra("BRIGHT")){
+            isBright=this.getIntent().getExtras().getBoolean("BRIGHT");
+            Log.i("BATTLE_DEBUG","There is BRIGHT:" + isBright);
+            if (isBright){
+                bgIV.setImageResource(R.drawable.background_bright);
+            }
+            else{
+                bgIV.setImageResource(R.drawable.background_dark);
+            }
+        }
 
         battleBG=findViewById(R.id.rect_overlay_battleBG);
 

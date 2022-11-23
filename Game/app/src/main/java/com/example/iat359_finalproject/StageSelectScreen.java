@@ -14,6 +14,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -30,6 +31,7 @@ public class StageSelectScreen extends AppCompatActivity implements View.OnClick
     public SensorManager mySensorManager;
     public Sensor myLightSensor;
     int brightness;
+    boolean isBright;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,12 +60,13 @@ public class StageSelectScreen extends AppCompatActivity implements View.OnClick
         characterButton.setOnClickListener(this);
 
         mySensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-        Sensor myLightSensor = mySensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
-        if(myLightSensor != null) {
-            mySensorManager.registerListener(this, myLightSensor, mySensorManager.SENSOR_DELAY_NORMAL);
-        }
+        myLightSensor = mySensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
+//        if(myLightSensor != null) {
+//            mySensorManager.registerListener(this, myLightSensor, mySensorManager.SENSOR_DELAY_NORMAL);
+//        }
 
     }
+
 
     @Override
     public void onRestart() {
@@ -95,18 +98,21 @@ public class StageSelectScreen extends AppCompatActivity implements View.OnClick
             case (R.id.stage1Button):
                 intent=new Intent(this,BattleScreen.class);
                 intent.putExtra("BATTLE",1);
+                intent.putExtra("BRIGHT",isBright);
                 startActivity(intent);
                 break;
 
             case (R.id.stage2Button):
                 intent=new Intent(this,BattleScreen.class);
                 intent.putExtra("BATTLE",2);
+                intent.putExtra("BRIGHT",isBright);
                 startActivity(intent);
                 break;
 
             case (R.id.stage3Button):
                 intent=new Intent(this,BattleScreen.class);
                 intent.putExtra("BATTLE",3);
+                intent.putExtra("BRIGHT",isBright);
                 startActivity(intent);
                 break;
 
@@ -146,7 +152,15 @@ public class StageSelectScreen extends AppCompatActivity implements View.OnClick
     public void onSensorChanged(SensorEvent sensorEvent) {
         int type=sensorEvent.sensor.getType();
         if (type ==Sensor.TYPE_LIGHT){
+
             brightness= (int) sensorEvent.values[0];
+            Log.i("SELECT_DEBUG","sensor value:"+ brightness );
+            if (brightness>40){
+                isBright=true;
+            }
+            else{
+                isBright=false;
+            }
         }
 
     }
