@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.widget.Toast;
 
 public class PlayerDatabase {
     private SQLiteDatabase pdb;
@@ -55,10 +56,17 @@ public class PlayerDatabase {
         SQLiteDatabase pdb = helper.getWritableDatabase();
         String[] columns = {PlayerConstants.UID, PlayerConstants.NAME, PlayerConstants.ELEMENT, PlayerConstants.LEVEL, PlayerConstants.BASE_HP,PlayerConstants.ATTACK, PlayerConstants.DEFENSE, PlayerConstants.INTELLIGENCE, PlayerConstants.SPEED, PlayerConstants.BATTLES_WON, EnemyConstants.FILE_PATH};
 
-        String selection = PlayerConstants.UID + "='" + name;
-        Cursor cursor = pdb.query(EnemyConstants.TABLE_NAME, columns, selection, null, null, null, null);
+        String selection = PlayerConstants.UID + "='" + name + "'";
+        Cursor cursor = pdb.query(PlayerConstants.TABLE_NAME, columns, selection, null, null, null, null);
         return cursor;
 
+    }
+
+    public int deleteRow(int deleted){
+        SQLiteDatabase pdb = helper.getWritableDatabase();
+        String[] whereArgs = new String[] { String.valueOf(deleted) };
+        int count = pdb.delete(PlayerConstants.TABLE_NAME, PlayerConstants.UID + "=?", whereArgs);
+        return count;
     }
 
 
