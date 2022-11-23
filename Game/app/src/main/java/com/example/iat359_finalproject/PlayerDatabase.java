@@ -54,7 +54,7 @@ public class PlayerDatabase {
     public Cursor getSelectedData(String name)
     {
         SQLiteDatabase pdb = helper.getWritableDatabase();
-        String[] columns = {PlayerConstants.UID, PlayerConstants.NAME, PlayerConstants.ELEMENT, PlayerConstants.LEVEL, PlayerConstants.BASE_HP,PlayerConstants.ATTACK, PlayerConstants.DEFENSE, PlayerConstants.INTELLIGENCE, PlayerConstants.SPEED, PlayerConstants.BATTLES_WON, EnemyConstants.FILE_PATH};
+        String[] columns = {PlayerConstants.UID, PlayerConstants.NAME, PlayerConstants.ELEMENT, PlayerConstants.LEVEL, PlayerConstants.BASE_HP,PlayerConstants.ATTACK, PlayerConstants.DEFENSE, PlayerConstants.INTELLIGENCE, PlayerConstants.SPEED, PlayerConstants.BATTLES_WON, PlayerConstants.FILE_PATH};
 
         String selection = PlayerConstants.UID + "='" + name + "'";
         Cursor cursor = pdb.query(PlayerConstants.TABLE_NAME, columns, selection, null, null, null, null);

@@ -70,7 +70,6 @@ public class HallOfFrameScreen extends AppCompatActivity implements View.OnClick
             queryResults.moveToFirst();
             while (!queryResults.isAfterLast()) {
 
-
                 //            Toast.makeText(this,"index",Toast.LENGTH_LONG).show();
                 queryUID.setText(queryResults.getString(index1));
                 queryName.setText(queryResults.getString(index2));
