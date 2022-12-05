@@ -8,7 +8,12 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -19,19 +24,31 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Switch;
+import android.widget.TextView;
+
+import java.io.File;
 
 public class StageSelectScreen extends AppCompatActivity implements View.OnClickListener, SensorEventListener{
     Button selectStageButton1,selectStageButton2,selectStageButton3,characterButton;
     LinearLayout characterLL;
+    ImageButton characterIV;
+    TextView characterNameTV, characterLevelTV;
     final int CHARACTER_REQUEST_CODE=1;
+
+    PlayerDatabase pdb;
+    PlayerHelper pHelper;
 
     float[] light_vals;
     public SensorManager mySensorManager;
     public Sensor myLightSensor;
     int brightness;
     boolean isBright;
+    String currentPath, currentName, currentLevel;
+    File imgFile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +65,49 @@ public class StageSelectScreen extends AppCompatActivity implements View.OnClick
         selectStageButton3=findViewById(R.id.stage3Button);
         characterButton=findViewById(R.id.characterButton);
         characterLL=findViewById(R.id.stageSelectSecondaryLL);
+
+        characterNameTV = findViewById(R.id.characterNameTV);
+        characterLevelTV = findViewById(R.id.characterLevelTV);
+
+        pdb = new PlayerDatabase(this);
+        pHelper = new PlayerHelper(this);
+
+        //setting the image of the stage select to the shared pref of current ID
+        characterIV=findViewById(R.id.characterIV);
+        SharedPreferences sharedPrefs = getSharedPreferences("CaptureFightData", Context.MODE_PRIVATE);
+        long currentID = sharedPrefs.getLong("currentID",0);
+        String userInputType = String.valueOf(currentID);
+//        Toast.makeText(this, "selection:"+ userInputType, Toast.LENGTH_SHORT).show();
+        Cursor queryResults = pdb.getSelectedData(userInputType);
+
+        int index1 = queryResults.getColumnIndex(PlayerConstants.FILE_PATH);
+        int index2 = queryResults.getColumnIndex(PlayerConstants.NAME);
+        int index3 = queryResults.getColumnIndex(PlayerConstants.LEVEL);
+
+        queryResults.moveToFirst();
+        while (!queryResults.isAfterLast()) {
+
+            //            Toast.makeText(this,"index",Toast.LENGTH_LONG).show();
+            currentPath = queryResults.getString(index1);
+            currentName = queryResults.getString(index2);
+            currentLevel = queryResults.getString(index3);
+            queryResults.moveToNext();
+        }
+        //https://stackoverflow.com/questions/4181774/show-image-view-from-file-path
+        if(currentPath!=null) {
+            imgFile = new File(currentPath);
+
+            if (imgFile.exists()) {
+
+                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                System.out.println("File Path = " + currentPath +" "+ index2 +" " + index2);
+
+                characterIV.setImageBitmap(myBitmap);
+
+                characterNameTV.setText(currentName);
+                characterLevelTV.setText(currentLevel);
+            }
+        }
 
         UITool.setButtonThemeColor(selectStageButton1,UITool.THEME_TYPE_SOLID,this);
         UITool.setButtonThemeColor(selectStageButton2,UITool.THEME_TYPE_SOLID,this);
@@ -83,7 +143,7 @@ public class StageSelectScreen extends AppCompatActivity implements View.OnClick
         if(myLightSensor != null) {
             mySensorManager.registerListener(this, myLightSensor, mySensorManager.SENSOR_DELAY_NORMAL);
         }
-        
+
     }
     @Override
     public void onPause(){

@@ -3,7 +3,12 @@ package com.example.iat359_finalproject;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,13 +18,24 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
+import java.io.File;
+
 public class BattleScreen extends AppCompatActivity implements View.OnClickListener {
     Button attackButton,defenceButton,escapeButton,magicButton;
     ImageView enemyIV,characterIV,bgIV;
     View battleBG;
     ProgressBar enemyHPProgressBar, characterHPProgressBar;
-    int stage;
+    long stage;
     boolean isBright;
+
+    EnemyDatabase edb;
+    PlayerDatabase pdb;
+    EnemyHelper eHelper;
+    PlayerHelper pHelper;
+    String currentPath;
+    String eCurrentPath;
+    File imgFile;
+    File eImgFile;
 
 
     @Override
@@ -36,7 +52,7 @@ public class BattleScreen extends AppCompatActivity implements View.OnClickListe
         bgIV=findViewById(R.id.battleBackgroundIV);
 
         if (this.getIntent().hasExtra("BATTLE")){
-            stage=this.getIntent().getExtras().getInt("BATTLE");
+            stage=(long) this.getIntent().getExtras().getInt("BATTLE");
             //and set up the stage with int number
         }
         if (this.getIntent().hasExtra("BRIGHT")){
@@ -76,6 +92,65 @@ public class BattleScreen extends AppCompatActivity implements View.OnClickListe
         UITool.setButtonThemeColor(escapeButton,UITool.THEME_TYPE_SOLID,this);
         UITool.setButtonThemeColor(magicButton,UITool.THEME_TYPE_SOLID,this);
 
+        edb = new EnemyDatabase(this);
+        eHelper = new EnemyHelper(this);
+        pdb = new PlayerDatabase(this);
+        pHelper = new PlayerHelper(this);
+
+        //setting the image of the battle to the shared pref of current ID
+        SharedPreferences sharedPrefs = getSharedPreferences("CaptureFightData", Context.MODE_PRIVATE);
+        long currentID = sharedPrefs.getLong("currentID",0);
+        String userInputType = String.valueOf(currentID);
+//        Toast.makeText(this, "selection:"+ userInputType, Toast.LENGTH_SHORT).show();
+        Cursor queryResults = pdb.getSelectedData(userInputType);
+
+        int index1 = queryResults.getColumnIndex(PlayerConstants.FILE_PATH);
+
+        queryResults.moveToFirst();
+        while (!queryResults.isAfterLast()) {
+
+            //            Toast.makeText(this,"index",Toast.LENGTH_LONG).show();
+            currentPath = queryResults.getString(index1);
+            queryResults.moveToNext();
+        }
+
+        if(currentPath!=null) {
+            imgFile = new File(currentPath);
+
+            if (imgFile.exists()) {
+
+                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                System.out.println("File Path = " + currentPath);
+                characterIV.setImageBitmap(myBitmap);
+
+            }
+        }
+
+        String enemyInput = String.valueOf(stage);
+//        Toast.makeText(this, "selection:"+ userInputType, Toast.LENGTH_SHORT).show();
+        Cursor enemyQueryResults = edb.getSelectedData(enemyInput);
+
+        int enemyIndex1 = enemyQueryResults.getColumnIndex(EnemyConstants.FILE_PATH);
+
+        enemyQueryResults.moveToFirst();
+        while (!enemyQueryResults.isAfterLast()) {
+
+            //            Toast.makeText(this,"index",Toast.LENGTH_LONG).show();
+            eCurrentPath = queryResults.getString(enemyIndex1);
+            enemyQueryResults.moveToNext();
+        }
+
+        if(eCurrentPath!=null) {
+            eImgFile = new File(eCurrentPath);
+
+            if (eImgFile.exists()) {
+
+                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                System.out.println("File Path = " + eCurrentPath);
+                enemyIV.setImageBitmap(myBitmap);
+
+            }
+        }
     }
 
     public void gotoSetting (View v){

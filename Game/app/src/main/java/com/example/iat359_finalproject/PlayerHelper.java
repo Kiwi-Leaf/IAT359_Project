@@ -27,7 +27,6 @@ public class PlayerHelper extends SQLiteOpenHelper {
                     PlayerConstants.ATTACK + " TEXT, " +
                     PlayerConstants.DEFENSE + " TEXT, " +
                     PlayerConstants.INTELLIGENCE + " TEXT, " +
-                    PlayerConstants.SPEED + " TEXT, " +
                     PlayerConstants.FILE_PATH + " TEXT, " +
                     PlayerConstants.BATTLES_WON + " TEXT);" ;
 

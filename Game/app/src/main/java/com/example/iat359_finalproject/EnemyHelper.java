@@ -21,13 +21,11 @@ public class EnemyHelper extends SQLiteOpenHelper {
                     EnemyConstants.ATTACK + " TEXT, " +
                     EnemyConstants.DEFENSE + " TEXT, " +
                     EnemyConstants.INTELLIGENCE + " TEXT, " +
-                    EnemyConstants.SPEED + " TEXT, " +
-                    EnemyConstants.TIME_CYCLE + " TEXT, " +
                     EnemyConstants.FILE_PATH + " TEXT);" ;
 
     private static final String DROP_TABLE = "DROP TABLE IF EXISTS " + EnemyConstants.TABLE_NAME;
 
-    private static final String INITIALIZE_EDB = "insert into "+ EnemyConstants.DATABASE_NAME +"(NAME, ELEMENT, BASE_HP, ATTACK, DEFENSE, INTELLIGENCE, SPEED, TIME_CYCLE, FILE_PATH) "+ "values (Cat, Electric, 7, 9, 6, 10, 16, Day, drawable/cat_electric.png), (Cat, Electric, 7, 9, 5, 12, 17, Night, drawable/cat_electric.png) " ;
+    private static final String INITIALIZE_EDB = "insert into "+ EnemyConstants.DATABASE_NAME +"(NAME, ELEMENT, BASE_HP, ATTACK, DEFENSE, INTELLIGENCE, FILE_PATH) "+ "values (Cat, Electric, 7, 9, 6, 10, drawable/cat_electric.png), (Cat, Fire, 7, 9, 6, 10, drawable/cat_fire.png), (Cat, Water, 7, 9, 6, 10, drawable/cat_water.png), (Cat, Wind, 7, 9, 6, 10, drawable/cat_wind.png) " ;
 
     public EnemyHelper(Context context){
         super (context, EnemyConstants.DATABASE_NAME, null, EnemyConstants.DATABASE_VERSION);
@@ -42,6 +40,7 @@ public class EnemyHelper extends SQLiteOpenHelper {
             edb.execSQL(INITIALIZE_EDB);
             Toast.makeText(context, "Intial data added", Toast.LENGTH_LONG).show();
         } catch (SQLException e) {
+            System.out.println("exception = " + e);
             Toast.makeText(context, "exception onCreate() edb", Toast.LENGTH_LONG).show();
         }
     }

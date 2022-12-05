@@ -157,18 +157,6 @@
             android:textSize="20dp"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/spdStaticTV"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/defStaticTV"
-            android:layout_alignStart="@id/hpStaticTV"
-            android:layout_marginTop="15dp"
-
-            android:text="SPD:"
-            android:textColor="@color/white"
-            android:textSize="20dp"
-            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/hpTV"
@@ -219,23 +207,12 @@
             android:textColor="@color/white"
             android:textSize="20dp" />
 
-        <TextView
-            android:id="@+id/spdTV"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@id/spdStaticTV"
-
-            android:layout_alignStart="@id/hpTV"
-            android:layout_marginTop="15dp"
-            android:text="[spd]"
-            android:textColor="@color/white"
-            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/keepCharacterTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/spdStaticTV"
+            android:layout_below="@id/defStaticTV"
             android:layout_marginTop="20dp"
             android:text="Keep this character?"
 
