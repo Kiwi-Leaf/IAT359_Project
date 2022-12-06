@@ -4,6 +4,7 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -26,6 +27,7 @@ public class GameEndScreen extends AppCompatActivity {
         getSupportActionBar().hide();
 
         setContentView(R.layout.activity_game_end_screen);
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         retryBattleButton=findViewById(R.id.retryBattleButton);
         backToStageButton=findViewById(R.id.backToStageButton);

@@ -11,6 +11,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -60,6 +61,9 @@ public class StageSelectScreen extends AppCompatActivity implements View.OnClick
         getSupportActionBar().hide();
 
         setContentView(R.layout.activity_stage_select_screen);
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+        
         selectStageButton1=findViewById(R.id.stage1Button);
         selectStageButton2=findViewById(R.id.stage2Button);
         selectStageButton3=findViewById(R.id.stage3Button);
