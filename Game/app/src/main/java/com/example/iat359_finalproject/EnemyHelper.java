@@ -25,7 +25,7 @@ public class EnemyHelper extends SQLiteOpenHelper {
 
     private static final String DROP_TABLE = "DROP TABLE IF EXISTS " + EnemyConstants.TABLE_NAME;
 
-    private static final String INITIALIZE_EDB = "insert into "+ EnemyConstants.DATABASE_NAME +"(NAME, ELEMENT, BASE_HP, ATTACK, DEFENSE, INTELLIGENCE, FILE_PATH) "+ "values (Cat, Electric, 7, 9, 6, 10, drawable/cat_electric.png), (Cat, Fire, 7, 9, 6, 10, drawable/cat_fire.png), (Cat, Water, 7, 9, 6, 10, drawable/cat_water.png), (Cat, Wind, 7, 9, 6, 10, drawable/cat_wind.png) " ;
+    private static final String INITIALIZE_EDB = "insert into "+ EnemyConstants.TABLE_NAME +"("+EnemyConstants.NAME +", "+EnemyConstants.ELEMENT + ", "+EnemyConstants.BASE_HP+", "+EnemyConstants.ATTACK+", "+EnemyConstants.DEFENSE+", "+EnemyConstants.INTELLIGENCE+", "+EnemyConstants.FILE_PATH+") "+ "values (\"Cat\", \"FIRE\", 7, 9, 6, 10, \"drawable/cat_fire\"), (\"Cat\", \"WATER\", 7, 9, 6, 10, \"drawable/cat_water\"),(\"Cat\", \"ELECTRIC\", 7, 9, 6, 10, \"drawable/cat_electric\"),(\"Cat\", \"WIND\", 7, 9, 6, 10, \"drawable/cat_wind\"),(\"Cat\", \"EARTH\", 7, 9, 6, 10, \"drawable/cat_earth\");";
 
     public EnemyHelper(Context context){
         super (context, EnemyConstants.DATABASE_NAME, null, EnemyConstants.DATABASE_VERSION);
@@ -39,6 +39,7 @@ public class EnemyHelper extends SQLiteOpenHelper {
             Toast.makeText(context, "onCreate() called", Toast.LENGTH_LONG).show();
             edb.execSQL(INITIALIZE_EDB);
             Toast.makeText(context, "Intial data added", Toast.LENGTH_LONG).show();
+            System.out.println("t'was inserted");
         } catch (SQLException e) {
             System.out.println("exception = " + e);
             Toast.makeText(context, "exception onCreate() edb", Toast.LENGTH_LONG).show();

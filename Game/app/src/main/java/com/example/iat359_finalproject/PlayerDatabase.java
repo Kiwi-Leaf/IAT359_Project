@@ -40,6 +40,23 @@ public class PlayerDatabase {
         return id;
     }
 
+
+    public void updateData (int lv, int hp, int atk,  int def, int inte, int wins, long clause)
+    {
+        pdb = helper.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(PlayerConstants.BASE_HP, hp);
+        contentValues.put(PlayerConstants.LEVEL, lv);
+        contentValues.put(PlayerConstants.ATTACK, atk);
+        contentValues.put(PlayerConstants.DEFENSE, def);
+        contentValues.put(PlayerConstants.INTELLIGENCE, inte);
+        contentValues.put(PlayerConstants.BATTLES_WON, wins);
+
+        String[] whereArgs = new String[] { String.valueOf(clause) };
+        pdb.update(PlayerConstants.TABLE_NAME, contentValues, PlayerConstants.UID + "=?", whereArgs);
+    }
+
     public Cursor getData()
     {
         SQLiteDatabase pdb = helper.getWritableDatabase();

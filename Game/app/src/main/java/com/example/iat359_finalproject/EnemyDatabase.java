@@ -51,7 +51,7 @@ public class EnemyDatabase {
         SQLiteDatabase edb = helper.getWritableDatabase();
         String[] columns = {EnemyConstants.UID, EnemyConstants.NAME, EnemyConstants.ELEMENT, EnemyConstants.BASE_HP,EnemyConstants.ATTACK, EnemyConstants.DEFENSE, EnemyConstants.INTELLIGENCE, EnemyConstants.FILE_PATH};
 
-        String selection = EnemyConstants.NAME + "='" +name+"'";
+        String selection = EnemyConstants.UID + "='" +name+"'";
         Cursor cursor = edb.query(EnemyConstants.TABLE_NAME, columns, selection, null, null, null, null);
         return cursor;
 

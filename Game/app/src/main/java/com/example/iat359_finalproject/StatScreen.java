@@ -152,6 +152,7 @@ public class StatScreen extends AppCompatActivity implements View.OnClickListene
                 break;
             case (R.id.cancelNewCharacterButton):
                 madeChange=false;
+                finish();
                 break;
             case (R.id.cameraButton):
                 if(allPermissionsGranted()){
@@ -174,7 +175,6 @@ public void addCharacter(){
 
     String name = characterNameET.getText().toString();
 
-
     hp = 8 + (int)(Math.random() * ((14 - 8) + level));
     str = 8 + (int)(Math.random() * ((14 - 8) + level));
     inte = 8 + (int)(Math.random() * ((14 - 8) + level));
@@ -189,7 +189,14 @@ public void addCharacter(){
     SharedPreferences sharedPrefs = getSharedPreferences("CaptureFightData", Context.MODE_PRIVATE);
     SharedPreferences.Editor editor = sharedPrefs.edit();
     editor.putLong("currentID", id);
-    editor.putLong("currentHP", hp);
+    editor.putInt("currentType", scannedType);
+    editor.putInt("currentHP", hp);
+    editor.putInt("currentMaxHP", hp);
+    editor.putInt("currentLV", level);
+    editor.putInt("currentStr", str);
+    editor.putInt("currentDef", def);
+    editor.putInt("currentInt", inte);
+
     editor.commit();
     if (id < 0)
     {
@@ -224,7 +231,7 @@ public void addCharacter(){
         int totalBlue = 0;
 
         int avgRed = 0;
-        int avgGreen =0;
+        int avgGreen = 0;
         int avgBlue = 0;
 
         for(int i=0; i<width; i++) {
@@ -253,7 +260,7 @@ public void addCharacter(){
         System.out.println("Hue = " + hue);
         System.out.println("Val = " + val);
 
-        if (((hue >= 0 && hue <= 30)||(hue >= 300)) && val > 0.55){
+        if (((hue >= 0 && hue <= 30)||(hue >= 300)) && val > 0.5){
             //red
             return 0;
         }
@@ -261,11 +268,11 @@ public void addCharacter(){
             //blue
             return 1;
         }
-        else if ((hue >= 30 && hue <= 76 )&& val > 0.55){
+        else if ((hue >= 30 && hue <= 76 )&& val > 0.5){
             //yellow
             return 2;
         }
-        else if ((hue >= 76 && hue <= 170) && val > 0.3) {
+        else if ((hue >= 76 && hue <= 170) && val > 0.25) {
             //green
             return 3;
         }
