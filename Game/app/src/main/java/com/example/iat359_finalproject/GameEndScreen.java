@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class GameEndScreen extends AppCompatActivity {
@@ -25,6 +26,7 @@ public class GameEndScreen extends AppCompatActivity {
     long currentID;
     PlayerDatabase pdb;
     PlayerHelper pHelper;
+    TextView endGameState;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,20 +43,22 @@ public class GameEndScreen extends AppCompatActivity {
         levelUpButton=findViewById(R.id.levelUpButton);
         heallButton=findViewById(R.id.heallButton);
         background=findViewById(R.id.rect_overlay_gameEnd);
+        endGameState=findViewById(R.id.endGameState);
 
         UITool.setThemeColor(background,UITool.THEME_TYPE_TRANS,this);
         UITool.setButtonThemeColor(levelUpButton,UITool.THEME_TYPE_SOLID,this);
         UITool.setButtonThemeColor(heallButton,UITool.THEME_TYPE_SOLID,this);
         pdb = new PlayerDatabase(this);
         pHelper = new PlayerHelper(this);
-
+        winCon=this.getIntent().getExtras().getBoolean("WIN");
         if (this.getIntent().hasExtra("WIN")){
             if (winCon){
-                winCon=this.getIntent().getExtras().getBoolean("WIN");
                 levelUpButton.setVisibility(View.VISIBLE);
+                endGameState.setText("Stage Clear!");
             }
             else{
                 levelUpButton.setVisibility(View.INVISIBLE);
+                endGameState.setText("Game Over!");
             }
         }
 
@@ -90,6 +94,7 @@ public class GameEndScreen extends AppCompatActivity {
             while (!queryResults.isAfterLast()) {
                 hp = queryResults.getInt(index1) +1;
                 level = queryResults.getInt(index2) +1;
+                System.out.println("level:"+level);
                 str = queryResults.getInt(index3) +1;
                 def = queryResults.getInt(index4) +1;
                 inte = queryResults.getInt(index5) +1;
@@ -105,8 +110,10 @@ public class GameEndScreen extends AppCompatActivity {
                 editor.commit();
                 queryResults.moveToNext();
             }
-            pdb.updateData(hp,level,str,def,inte,bats, currentID);
+            pdb.updateData(level,hp,str,def,inte,bats, currentID);
         }
+        Toast.makeText(this, "Level Up", Toast.LENGTH_SHORT).show();
+
         Intent stage=new Intent(this, StageSelectScreen.class);
         startActivity(stage);
     }
@@ -116,14 +123,47 @@ public class GameEndScreen extends AppCompatActivity {
 
         currentID = sharedPrefs.getLong("currentID",0);
         if(currentID != 0) {
-            int baseHP = sharedPrefs.getInt("currentMaxHP", 0);
-            int currentHP = baseHP;
-            SharedPreferences.Editor editor = sharedPrefs.edit();
-            editor.putInt("currentHP", baseHP);
-            editor.commit();
-        }
-        Toast.makeText(this, "Level Up", Toast.LENGTH_SHORT).show();
-        Intent stage=new Intent(this, StageSelectScreen.class);
+
+            String userInputType = String.valueOf(currentID);
+
+            Cursor queryResults = pdb.getSelectedData(userInputType);
+
+            int index1 = queryResults.getColumnIndex(PlayerConstants.BASE_HP);
+            int index2 = queryResults.getColumnIndex(PlayerConstants.LEVEL);
+            int index3 = queryResults.getColumnIndex(PlayerConstants.ATTACK);
+            int index4 = queryResults.getColumnIndex(PlayerConstants.DEFENSE);
+            int index5 = queryResults.getColumnIndex(PlayerConstants.INTELLIGENCE);
+            int index6 = queryResults.getColumnIndex(PlayerConstants.BATTLES_WON);
+
+            int hp=0;
+            int level=0;
+            int str=0;
+            int def=0;
+            int inte=0;
+            int bats=0;
+
+            queryResults.moveToFirst();
+            while (!queryResults.isAfterLast()) {
+                hp = queryResults.getInt(index1) ;
+                level = queryResults.getInt(index2);
+                System.out.println("level:"+level);
+                str = queryResults.getInt(index3);
+                def = queryResults.getInt(index4);
+                inte = queryResults.getInt(index5);
+                bats = queryResults.getInt(index6);
+
+                SharedPreferences.Editor editor = sharedPrefs.edit();
+                editor.putInt("currentHP", hp);
+                editor.putInt("currentMaxHP", hp);
+                editor.putInt("currentLV", level);
+                editor.putInt("currentStr", str);
+                editor.putInt("currentDef", def);
+                editor.putInt("currentInt", inte);
+                editor.commit();
+                queryResults.moveToNext();
+            }
+            pdb.updateData(level,hp,str,def,inte,bats, currentID);
+        }Intent stage=new Intent(this, StageSelectScreen.class);
         startActivity(stage);
     }
     @Override

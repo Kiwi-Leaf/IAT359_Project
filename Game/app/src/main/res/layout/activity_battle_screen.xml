@@ -162,7 +162,7 @@
         android:id="@+id/defenceButton"
 
         android:backgroundTint="@color/fire"
-        android:text="Defence"
+        android:text="Defend"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         app:layout_constraintHorizontal_weight="2"

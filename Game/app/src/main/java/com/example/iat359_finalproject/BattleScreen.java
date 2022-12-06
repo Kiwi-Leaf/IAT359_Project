@@ -113,7 +113,6 @@ public class BattleScreen extends AppCompatActivity implements View.OnClickListe
         if(currentID != 0) {
             int currentHP = sharedPrefs.getInt("currentHP", 0);
             int baseHP = sharedPrefs.getInt("currentMaxHP", 0);
-            currentLevel = sharedPrefs.getInt("currentLV",0);
             int cHPPercent = (int) 100 * currentHP / baseHP;
             characterHPProgressBar.setProgress(cHPPercent);
         }
@@ -125,11 +124,14 @@ public class BattleScreen extends AppCompatActivity implements View.OnClickListe
         Cursor queryResults = pdb.getSelectedData(userInputType);
 
         int index1 = queryResults.getColumnIndex(PlayerConstants.FILE_PATH);
+        int index2 = queryResults.getColumnIndex(PlayerConstants.LEVEL);
 
         queryResults.moveToFirst();
         while (!queryResults.isAfterLast()) {
             //            Toast.makeText(this,"index",Toast.LENGTH_LONG).show();
             currentPath = queryResults.getString(index1);
+
+            currentLevel = queryResults.getInt(index2);
             queryResults.moveToNext();
         }
 
@@ -161,11 +163,11 @@ public class BattleScreen extends AppCompatActivity implements View.OnClickListe
             eCurrentPath = enemyQueryResults.getString(enemyIndex1);
             String eName = enemyQueryResults.getString(enemyIndex2);
             String eType = enemyQueryResults.getString(enemyIndex3);
-            int eBaseHP = (int) ( Integer.parseInt(enemyQueryResults.getString(enemyIndex4))+(currentLevel*5));
-            int eCurrentHP = (int) (Integer.parseInt(enemyQueryResults.getString(enemyIndex4))+(currentLevel*5));
-            int eAtk = (int) (Integer.parseInt(enemyQueryResults.getString(enemyIndex5))+(currentLevel*3));
-            int eDef = (int) (Integer.parseInt(enemyQueryResults.getString(enemyIndex6))+(currentLevel*3));
-            int eInt = (int) (Integer.parseInt(enemyQueryResults.getString(enemyIndex7))+(currentLevel*3));
+            int eBaseHP = (int) ( Integer.parseInt(enemyQueryResults.getString(enemyIndex4))+(currentLevel*3));
+            int eCurrentHP = (int) (Integer.parseInt(enemyQueryResults.getString(enemyIndex4))+(currentLevel*3));
+            int eAtk = (int) (Integer.parseInt(enemyQueryResults.getString(enemyIndex5))+(currentLevel*1.5));
+            int eDef = (int) (Integer.parseInt(enemyQueryResults.getString(enemyIndex6))+(currentLevel*2));
+            int eInt = (int) (Integer.parseInt(enemyQueryResults.getString(enemyIndex7))+(currentLevel*1.5));
 
             System.out.println("EnemyFile Path = " + eCurrentPath);
             enemyQueryResults.moveToNext();
@@ -173,7 +175,7 @@ public class BattleScreen extends AppCompatActivity implements View.OnClickListe
             enemyIV.setImageResource(enemyPath);
 
             SharedPreferences.Editor editor = sharedPrefs.edit();
-            editor.putString("eCurrentType", eName);
+            editor.putString("eCurrentName", eName);
             editor.putString("eCurrentType", eType);
             editor.putInt("eCurrentHP", eCurrentHP);
             editor.putInt("eCurrentMaxHP", eBaseHP);
@@ -291,7 +293,7 @@ public class BattleScreen extends AppCompatActivity implements View.OnClickListe
                     currentHP -= eDamage;
 
                     if(currentHP<baseHP){
-                        currentHP += level;
+                        currentHP += 2;
                     }
 //                    System.out.println("HP Now: "+ currentHP);
                     editor.putInt("currentHP", currentHP);
