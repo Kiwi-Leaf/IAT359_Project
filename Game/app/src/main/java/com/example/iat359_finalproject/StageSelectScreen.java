@@ -21,6 +21,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -255,5 +256,15 @@ public class StageSelectScreen extends AppCompatActivity implements View.OnClick
     @Override
     public void onAccuracyChanged(Sensor sensor, int i) {
 
+    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK) )
+        {
+            Intent stage=new Intent(this, MainActivity.class);
+            startActivity(stage);
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }
