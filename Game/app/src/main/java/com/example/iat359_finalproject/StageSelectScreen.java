@@ -241,7 +241,7 @@ public class StageSelectScreen extends AppCompatActivity implements View.OnClick
         if (type ==Sensor.TYPE_LIGHT){
 
             brightness= (int) sensorEvent.values[0];
-            Log.i("SELECT_DEBUG","sensor value:"+ brightness );
+//            Log.i("SELECT_DEBUG","sensor value:"+ brightness );
             if (brightness>40){
                 isBright=true;
             }

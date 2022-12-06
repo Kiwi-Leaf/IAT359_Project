@@ -146,7 +146,7 @@ public class BattleScreen extends AppCompatActivity implements View.OnClickListe
         }
 
         String enemyInput = String.valueOf(stage);
-        Toast.makeText(this, "Stage:"+ enemyInput, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "Stage:"+ enemyInput, Toast.LENGTH_SHORT).show();
         Cursor enemyQueryResults = edb.getSelectedData(enemyInput);
         int enemyIndex1 = enemyQueryResults.getColumnIndex(EnemyConstants.FILE_PATH);
         int enemyIndex2 =  enemyQueryResults.getColumnIndex(EnemyConstants.NAME);

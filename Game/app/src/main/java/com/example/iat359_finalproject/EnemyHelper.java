@@ -36,13 +36,13 @@ public class EnemyHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase edb) {
         try {
             edb.execSQL(CREATE_TABLE);
-            Toast.makeText(context, "onCreate() called", Toast.LENGTH_LONG).show();
+//            Toast.makeText(context, "onCreate() called", Toast.LENGTH_LONG).show();
             edb.execSQL(INITIALIZE_EDB);
-            Toast.makeText(context, "Intial data added", Toast.LENGTH_LONG).show();
+//            Toast.makeText(context, "Intial data added", Toast.LENGTH_LONG).show();
             System.out.println("t'was inserted");
         } catch (SQLException e) {
             System.out.println("exception = " + e);
-            Toast.makeText(context, "exception onCreate() edb", Toast.LENGTH_LONG).show();
+//            Toast.makeText(context, "exception onCreate() edb", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -51,9 +51,9 @@ public class EnemyHelper extends SQLiteOpenHelper {
         try {
             edb.execSQL(DROP_TABLE);
             onCreate(edb);
-            Toast.makeText(context, "onUpgrade called", Toast.LENGTH_LONG).show();
+//            Toast.makeText(context, "onUpgrade called", Toast.LENGTH_LONG).show();
         } catch (SQLException e) {
-            Toast.makeText(context, "exception onUpgrade() edb", Toast.LENGTH_LONG).show();
+//            Toast.makeText(context, "exception onUpgrade() edb", Toast.LENGTH_LONG).show();
         }
     }
 
