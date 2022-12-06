@@ -37,7 +37,7 @@ public class StageSelectScreen extends AppCompatActivity implements View.OnClick
     Button selectStageButton1,selectStageButton2,selectStageButton3,characterButton;
     LinearLayout characterLL;
     ImageButton characterIV;
-    TextView characterNameTV, characterLevelTV;
+    TextView characterNameTV, characterLevelTV, characterTypeTV, characterAtkTV,characterDefTV, characterIntTV;
     final int CHARACTER_REQUEST_CODE=1;
 
     PlayerDatabase pdb;
@@ -48,7 +48,7 @@ public class StageSelectScreen extends AppCompatActivity implements View.OnClick
     public Sensor myLightSensor;
     int brightness;
     boolean isBright;
-    String currentPath, currentName, currentLevel;
+    String currentPath, currentName, currentLevel, currentAtk, currentDef, currentInt,currentElement;
     File imgFile;
 
     @Override
@@ -72,6 +72,11 @@ public class StageSelectScreen extends AppCompatActivity implements View.OnClick
 
         characterNameTV = findViewById(R.id.characterNameTV);
         characterLevelTV = findViewById(R.id.characterLevelTV);
+        characterTypeTV = findViewById(R.id.characterTypeTV);
+
+        characterAtkTV = findViewById(R.id.characterAtkTV);
+        characterDefTV = findViewById(R.id.characterDefTV);
+        characterIntTV = findViewById(R.id.characterIntTV);
 
         pdb = new PlayerDatabase(this);
         pHelper = new PlayerHelper(this);
@@ -87,6 +92,12 @@ public class StageSelectScreen extends AppCompatActivity implements View.OnClick
         int index1 = queryResults.getColumnIndex(PlayerConstants.FILE_PATH);
         int index2 = queryResults.getColumnIndex(PlayerConstants.NAME);
         int index3 = queryResults.getColumnIndex(PlayerConstants.LEVEL);
+        int index7 = queryResults.getColumnIndex(PlayerConstants.ELEMENT);
+
+        int index4 = queryResults.getColumnIndex(PlayerConstants.ATTACK);
+        int index5 = queryResults.getColumnIndex(PlayerConstants.DEFENSE);
+        int index6 = queryResults.getColumnIndex(PlayerConstants.INTELLIGENCE);
+
 
         queryResults.moveToFirst();
         while (!queryResults.isAfterLast()) {
@@ -95,6 +106,11 @@ public class StageSelectScreen extends AppCompatActivity implements View.OnClick
             currentPath = queryResults.getString(index1);
             currentName = queryResults.getString(index2);
             currentLevel = queryResults.getString(index3);
+
+            currentAtk = queryResults.getString(index4);
+            currentDef = queryResults.getString(index5);
+            currentInt = queryResults.getString(index6);
+            currentElement = queryResults.getString(index7);
             queryResults.moveToNext();
         }
         //https://stackoverflow.com/questions/4181774/show-image-view-from-file-path
@@ -107,9 +123,13 @@ public class StageSelectScreen extends AppCompatActivity implements View.OnClick
                 System.out.println("File Path = " + currentPath +" "+ index2 +" " + index2);
 
                 characterIV.setImageBitmap(myBitmap);
-
-                characterNameTV.setText(currentName);
                 characterLevelTV.setText(currentLevel);
+                characterNameTV.setText(currentName);
+                characterTypeTV.setText(currentElement);
+
+                characterAtkTV.setText(currentAtk);
+                characterDefTV.setText(currentDef);
+                characterIntTV.setText(currentInt);
             }
         }
 
@@ -158,24 +178,27 @@ public class StageSelectScreen extends AppCompatActivity implements View.OnClick
     @Override
     public void onClick(View view) {
         Intent intent ;
+        int com1 = 1+ (int)(Math.random() * ((15) + 1));
+        int com2 = 15 + (int)(Math.random() * ((10) + 1));
+        int com3 = 25 + (int)(Math.random() * ((10) + 1));
         switch (view.getId()){
             case (R.id.stage1Button):
                 intent=new Intent(this,BattleScreen.class);
-                intent.putExtra("BATTLE",1);
+                intent.putExtra("BATTLE",com1);
                 intent.putExtra("BRIGHT",isBright);
                 startActivity(intent);
                 break;
 
             case (R.id.stage2Button):
                 intent=new Intent(this,BattleScreen.class);
-                intent.putExtra("BATTLE",2);
+                intent.putExtra("BATTLE",com2);
                 intent.putExtra("BRIGHT",isBright);
                 startActivity(intent);
                 break;
 
             case (R.id.stage3Button):
                 intent=new Intent(this,BattleScreen.class);
-                intent.putExtra("BATTLE",3);
+                intent.putExtra("BATTLE",com3);
                 intent.putExtra("BRIGHT",isBright);
                 startActivity(intent);
                 break;

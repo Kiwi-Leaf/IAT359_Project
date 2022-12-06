@@ -263,19 +263,19 @@ public void addCharacter(){
         System.out.println("Hue = " + hue);
         System.out.println("Val = " + val);
 
-        if (((hue >= 0 && hue <= 30)||(hue >= 300)) && val > 0.5){
+        if (((hue >= 0 && hue <= 30)||(hue >= 300)) && val > 0.35){
             //red
             return 0;
         }
-        else if (hue >= 170 && hue <= 300 && val > 0.2){
+        else if (hue >= 170 && hue <= 300 && val > 0.15){
             //blue
             return 1;
         }
-        else if ((hue >= 30 && hue <= 76 )&& val > 0.5){
+        else if ((hue >= 30 && hue <= 76 )&& val > 0.35){
             //yellow
             return 2;
         }
-        else if ((hue >= 76 && hue <= 170) && val > 0.25) {
+        else if ((hue >= 76 && hue <= 170) && val > 0.15) {
             //green
             return 3;
         }

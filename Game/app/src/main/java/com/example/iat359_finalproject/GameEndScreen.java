@@ -107,7 +107,6 @@ public class GameEndScreen extends AppCompatActivity {
             }
             pdb.updateData(hp,level,str,def,inte,bats, currentID);
         }
-
         Intent stage=new Intent(this, StageSelectScreen.class);
         startActivity(stage);
     }

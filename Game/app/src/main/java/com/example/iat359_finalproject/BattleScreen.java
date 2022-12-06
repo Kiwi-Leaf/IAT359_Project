@@ -161,11 +161,11 @@ public class BattleScreen extends AppCompatActivity implements View.OnClickListe
             eCurrentPath = enemyQueryResults.getString(enemyIndex1);
             String eName = enemyQueryResults.getString(enemyIndex2);
             String eType = enemyQueryResults.getString(enemyIndex3);
-            int eBaseHP = (int) ( Integer.parseInt(enemyQueryResults.getString(enemyIndex4))*(currentLevel*1.01));
-            int eCurrentHP = (int) (Integer.parseInt(enemyQueryResults.getString(enemyIndex4))*(currentLevel*1.01));
-            int eAtk = (int) (Integer.parseInt(enemyQueryResults.getString(enemyIndex5))*(currentLevel*1.01));
-            int eDef = (int) (Integer.parseInt(enemyQueryResults.getString(enemyIndex6))*(currentLevel*1.01));
-            int eInt = (int) (Integer.parseInt(enemyQueryResults.getString(enemyIndex7))*(currentLevel*1.01));
+            int eBaseHP = (int) ( Integer.parseInt(enemyQueryResults.getString(enemyIndex4))+(currentLevel*5));
+            int eCurrentHP = (int) (Integer.parseInt(enemyQueryResults.getString(enemyIndex4))+(currentLevel*5));
+            int eAtk = (int) (Integer.parseInt(enemyQueryResults.getString(enemyIndex5))+(currentLevel*3));
+            int eDef = (int) (Integer.parseInt(enemyQueryResults.getString(enemyIndex6))+(currentLevel*3));
+            int eInt = (int) (Integer.parseInt(enemyQueryResults.getString(enemyIndex7))+(currentLevel*3));
 
             System.out.println("EnemyFile Path = " + eCurrentPath);
             enemyQueryResults.moveToNext();
