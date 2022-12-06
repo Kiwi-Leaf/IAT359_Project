@@ -3,6 +3,7 @@ package com.example.iat359_finalproject;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -30,6 +31,8 @@ public class SplashScreen extends AppCompatActivity {
         getSupportActionBar().hide();
 
         setContentView(R.layout.activity_splash_screen);
+
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         myDetector = new GestureDetector(this, gestureListener);
         backgroundIV=findViewById(R.id.backgroundIV);

@@ -19,6 +19,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -78,6 +79,8 @@ public class StatScreen extends AppCompatActivity implements View.OnClickListene
         getSupportActionBar().hide();
 
         setContentView(R.layout.activity_stat_screen);
+
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         hpTV=findViewById(R.id.hpTV);
         strTV=findViewById(R.id.strTV);

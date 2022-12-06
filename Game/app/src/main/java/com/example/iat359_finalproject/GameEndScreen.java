@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -35,6 +36,7 @@ public class GameEndScreen extends AppCompatActivity {
         getSupportActionBar().hide();
 
         setContentView(R.layout.activity_game_end_screen);
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         levelUpButton=findViewById(R.id.levelUpButton);
         heallButton=findViewById(R.id.heallButton);
