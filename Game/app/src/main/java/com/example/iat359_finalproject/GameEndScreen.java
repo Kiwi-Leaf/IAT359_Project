@@ -49,8 +49,8 @@ public class GameEndScreen extends AppCompatActivity {
         pHelper = new PlayerHelper(this);
 
         if (this.getIntent().hasExtra("WIN")){
-            winCon=this.getIntent().getExtras().getBoolean("WIN");
             if (winCon){
+                winCon=this.getIntent().getExtras().getBoolean("WIN");
                 levelUpButton.setVisibility(View.VISIBLE);
             }
             else{
