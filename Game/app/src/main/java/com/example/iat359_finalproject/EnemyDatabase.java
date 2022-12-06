@@ -20,7 +20,7 @@ public class EnemyDatabase {
         helper = new EnemyHelper(context);
     }
 
-    public long insertData (String name, String elem, int hp, int atk,  int def,  int inte, int spd, String cycle, String img)
+    public long insertData (String name, String elem, int hp, int atk,  int def,  int inte, String img)
     {
         edb = helper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -30,8 +30,6 @@ public class EnemyDatabase {
         contentValues.put(EnemyConstants.ATTACK, atk);
         contentValues.put(EnemyConstants.DEFENSE, def);
         contentValues.put(EnemyConstants.INTELLIGENCE, inte);
-        contentValues.put(EnemyConstants.SPEED, spd);
-        contentValues.put(EnemyConstants.TIME_CYCLE, cycle);
         contentValues.put(EnemyConstants.FILE_PATH, img);
 
         long id = edb.insert(EnemyConstants.TABLE_NAME, null, contentValues);
@@ -42,18 +40,18 @@ public class EnemyDatabase {
     {
         SQLiteDatabase edb = helper.getWritableDatabase();
 
-        String[] columns = {EnemyConstants.UID, EnemyConstants.NAME, EnemyConstants.ELEMENT, EnemyConstants.BASE_HP,EnemyConstants.ATTACK, EnemyConstants.DEFENSE, EnemyConstants.INTELLIGENCE, EnemyConstants.SPEED, EnemyConstants.TIME_CYCLE, EnemyConstants.FILE_PATH};
+        String[] columns = {EnemyConstants.UID, EnemyConstants.NAME, EnemyConstants.ELEMENT, EnemyConstants.BASE_HP,EnemyConstants.ATTACK, EnemyConstants.DEFENSE, EnemyConstants.INTELLIGENCE, EnemyConstants.FILE_PATH};
         Cursor cursor = edb.query(EnemyConstants.TABLE_NAME, columns, null, null, null, null, null);
         return cursor;
     }
 
 
-    public Cursor getSelectedData(String name, String cycle)
+    public Cursor getSelectedData(String name)
     {
         SQLiteDatabase edb = helper.getWritableDatabase();
-        String[] columns = {EnemyConstants.UID, EnemyConstants.NAME, EnemyConstants.ELEMENT, EnemyConstants.BASE_HP,EnemyConstants.ATTACK, EnemyConstants.DEFENSE, EnemyConstants.INTELLIGENCE, EnemyConstants.SPEED, EnemyConstants.TIME_CYCLE, EnemyConstants.FILE_PATH};
+        String[] columns = {EnemyConstants.UID, EnemyConstants.NAME, EnemyConstants.ELEMENT, EnemyConstants.BASE_HP,EnemyConstants.ATTACK, EnemyConstants.DEFENSE, EnemyConstants.INTELLIGENCE, EnemyConstants.FILE_PATH};
 
-        String selection = EnemyConstants.NAME + "='" +name+ "' AND " + EnemyConstants.TIME_CYCLE + "='" +cycle+ "'";
+        String selection = EnemyConstants.UID + "='" +name+"'";
         Cursor cursor = edb.query(EnemyConstants.TABLE_NAME, columns, selection, null, null, null, null);
         return cursor;
 

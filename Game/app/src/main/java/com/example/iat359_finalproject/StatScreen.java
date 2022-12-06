@@ -1,5 +1,9 @@
 package com.example.iat359_finalproject;
 
+import static androidx.core.graphics.ColorKt.getBlue;
+import static androidx.core.graphics.ColorKt.getGreen;
+import static androidx.core.graphics.ColorKt.getRed;
+
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -11,10 +15,16 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -29,6 +39,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -37,13 +48,14 @@ import java.util.Random;
 
 public class StatScreen extends AppCompatActivity implements View.OnClickListener{
     // Show current character when entered
-    TextView hpTV,strTV,intTV,defTV,spdTV,lvTV,typeTV;
+    TextView hpTV,strTV,intTV,defTV,lvTV,typeTV;
     EditText characterNameET;
     View characterStatRL;
     ImageView charIV;
     Button saveButton,cancelButton,cameraButton;
-
-    String currentPhotoPath;
+    String currentPhotoPath, photoPath;
+    Bitmap srcImg;
+    File imgFile;
 
     private int REQUEST_CODE_PERMISSIONS = 101;
     private final String[] REQUIRED_PERMISSIONS = new String[]{"android.permission.CAMERA"};
@@ -68,11 +80,12 @@ public class StatScreen extends AppCompatActivity implements View.OnClickListene
 
         setContentView(R.layout.activity_stat_screen);
 
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         hpTV=findViewById(R.id.hpTV);
         strTV=findViewById(R.id.strTV);
         intTV=findViewById(R.id.intTV);
         defTV=findViewById(R.id.defTV);
-        spdTV=findViewById(R.id.spdTV);
         lvTV=findViewById(R.id.lvTV);
         typeTV=findViewById(R.id.typeTV);
 
@@ -142,6 +155,7 @@ public class StatScreen extends AppCompatActivity implements View.OnClickListene
                 break;
             case (R.id.cancelNewCharacterButton):
                 madeChange=false;
+                finish();
                 break;
             case (R.id.cameraButton):
                 if(allPermissionsGranted()){
@@ -158,45 +172,115 @@ public class StatScreen extends AppCompatActivity implements View.OnClickListene
     }
 public void addCharacter(){
 
-    int hp, str, inte, def, spd;
+    int hp, str, inte, def;
 
     int level = 1;
 
     String name = characterNameET.getText().toString();
 
+    hp = 8 + (int)(Math.random() * ((14 - 8) + level));
+    str = 8 + (int)(Math.random() * ((14 - 8) + level));
+    inte = 8 + (int)(Math.random() * ((14 - 8) + level));
+    def = 8 + (int)(Math.random() * ((14 - 8) + level));
 
-    hp = 8 + (int)(Math.random() * ((14 - 8) + 1));
-    str = 8 + (int)(Math.random() * ((14 - 8) + 1));
-    inte = 8 + (int)(Math.random() * ((14 - 8) + 1));
-    def = 8 + (int)(Math.random() * ((14 - 8) + 1));
-    spd = 8 + (int)(Math.random() * ((14 - 8) + 1));
+    int scannedType = scanType();
+    String type= UITool.isType(scannedType);
+    Toast.makeText(this, "Scanned Type: " + type, Toast.LENGTH_SHORT).show();
 
-    //create random number for element type
-    Random random= new Random();
-    int typeRan= random.nextInt(5);
-    String type= UITool.isType(typeRan);
-
-
-    long id = pdb.insertData(name, type, level,hp,str, def, inte, spd, 0, "drawable/cat_electric.png");
+    long id = pdb.insertData(name, type, level,hp,str, def, inte, 0, photoPath);
     Toast.makeText(this, "ID: " + id, Toast.LENGTH_SHORT).show();
+    SharedPreferences sharedPrefs = getSharedPreferences("CaptureFightData", Context.MODE_PRIVATE);
+    SharedPreferences.Editor editor = sharedPrefs.edit();
+    editor.putLong("currentID", id);
+    editor.putInt("currentType", scannedType);
+    editor.putInt("currentHP", hp);
+    editor.putInt("currentMaxHP", hp);
+    editor.putInt("currentLV", level);
+    editor.putInt("currentStr", str);
+    editor.putInt("currentDef", def);
+    editor.putInt("currentInt", inte);
+
+    editor.commit();
     if (id < 0)
     {
         Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show();
     }
     else
     {
-        Toast.makeText(this, "success", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "success", Toast.LENGTH_SHORT).show();
     }
 
 
     hpTV.setText(String.valueOf(hp));
     strTV.setText(String.valueOf(str));
     intTV.setText(String.valueOf(inte));
-    spdTV.setText(String.valueOf(spd));
     defTV.setText(String.valueOf(def));
     typeTV.setText(type);
     lvTV.setText(String.valueOf(level));
 
+    }
+
+    public int scanType(){
+        if(srcImg == null){
+            Random random= new Random();
+            int typeRan= random.nextInt(4);
+            return typeRan;
+        }
+        int width = srcImg.getWidth();
+        int height = srcImg.getHeight();
+
+        int totalRed = 0;
+        int totalGreen =0;
+        int totalBlue = 0;
+
+        int avgRed = 0;
+        int avgGreen = 0;
+        int avgBlue = 0;
+
+        for(int i=0; i<width; i++) {
+            for(int q=0; q< height; q++) {
+                int colour = srcImg.getPixel(i, q);
+
+                int red = getRed(colour);
+                int green = getGreen(colour);
+                int blue = getBlue(colour);
+
+                totalRed += red;
+                totalGreen += green;
+                totalBlue += blue;
+            }
+        }
+        avgRed = totalRed/(width*height);
+        avgGreen = totalGreen/(width*height);
+        avgBlue = totalBlue/(width*height);
+
+
+        float[] hsv = new float[3];
+        Color.RGBToHSV(avgRed, avgGreen, avgBlue, hsv);
+        float hue = hsv[0];
+        float sat = hsv[1];
+        float val = hsv[2];
+        System.out.println("Hue = " + hue);
+        System.out.println("Val = " + val);
+
+        if (((hue >= 0 && hue <= 30)||(hue >= 300)) && val > 0.35){
+            //red
+            return 0;
+        }
+        else if (hue >= 170 && hue <= 300 && val > 0.15){
+            //blue
+            return 1;
+        }
+        else if ((hue >= 30 && hue <= 76 )&& val > 0.35){
+            //yellow
+            return 2;
+        }
+        else if ((hue >= 76 && hue <= 170) && val > 0.15) {
+            //green
+            return 3;
+        }
+        //brown/other
+        else return 4;
     }
 
     @Override
@@ -213,9 +297,37 @@ public void addCharacter(){
                 public void onActivityResult(ActivityResult result) {
                     Bitmap photo = (Bitmap) result.getData().getExtras().get("data");
                     charIV.setImageBitmap(photo);
+                    srcImg = photo;
+
+                    // CALL THIS METHOD TO GET THE URI FROM THE BITMAP
+                    Uri tempUri = getImageUri(getApplicationContext(), photo);
+
+                    // CALL THIS METHOD TO GET THE ACTUAL PATH
+                    File finalFile = new File(getRealPathFromURI(tempUri));
+
+                    imgFile = finalFile;
+
+                    photoPath = finalFile.getAbsolutePath();
+
+                    System.out.println("Filepath = " + photoPath);
                 }
             });
+//https://stackoverflow.com/questions/15432592/get-file-path-of-image-on-android
 
+    public Uri getImageUri(Context inContext, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, timeStamp, null);
+        return Uri.parse(path);
+    }
+
+    public String getRealPathFromURI(Uri uri) {
+        Cursor cursor = getContentResolver().query(uri, null, null, null, null);
+        cursor.moveToFirst();
+        int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+        return cursor.getString(idx);
+    }
     private boolean allPermissionsGranted(){
 
         for(String permission : REQUIRED_PERMISSIONS){
@@ -255,14 +367,4 @@ public void addCharacter(){
             finish();
         }
     }
-
-    //see above citation
-    public void galleryAddPic() {
-        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-        File f = new File(currentPhotoPath);
-        Uri contentUri = Uri.fromFile(f);
-        mediaScanIntent.setData(contentUri);
-        this.sendBroadcast(mediaScanIntent);
-    }
-
 }

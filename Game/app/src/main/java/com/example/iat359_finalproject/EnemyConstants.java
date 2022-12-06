@@ -11,8 +11,6 @@ public class EnemyConstants {
     public static final String ATTACK = "atk";
     public static final String DEFENSE = "def";
     public static final String INTELLIGENCE = "inte";
-    public static final String SPEED = "spd";
-    public static final String TIME_CYCLE = "cycle";
     public static final String FILE_PATH ="img";
     public static final int DATABASE_VERSION = 1;
 }
